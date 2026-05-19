@@ -28,6 +28,8 @@ apis:
     description: >-
       The American Greetings API provides access to platform services and data for enterprise integration and automation.
 common:
+  - type: LinkedIn
+    url: https://www.linkedin.com/company/american-greetings
   - type: Website
     url: https://www.americangreetings.com
 maintainers:
