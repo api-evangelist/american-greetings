@@ -28,6 +28,8 @@ apis:
     description: >-
       The American Greetings API provides access to platform services and data for enterprise integration and automation.
 common:
+  - type: DomainSecurity
+    url: security/american-greetings-domain-security.yml
   - type: LinkedIn
     url: https://www.linkedin.com/company/american-greetings
   - type: Website
