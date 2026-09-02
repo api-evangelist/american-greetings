@@ -1,0 +1,103 @@
+generated: '2026-09-02'
+method: derived
+source: >-
+  openapi/american-greetings-corporate-wordpress-rest-openapi.yml, live responses from
+  https://corporate.americangreetings.com/wp-json/, and probes of every American Greetings host
+specification: API Commons Conformance
+specificationVersion: '0.1'
+provider: American Greetings
+providerId: american-greetings
+description: >-
+  Cross-cutting and domain standard conformance for American Greetings. American Greetings is a
+  consumer greeting-card and social-expression manufacturer; it operates in a market with no API
+  interchange standard of its own, and it makes no compliance claim on any public page. Almost
+  every row below is therefore a negative, asserted only where a probe or the provider's own
+  machine-readable route index supports it.
+standards:
+  - id: oauth2
+    conforms: false
+    evidence: >-
+      No oauth2 securityScheme in the derived contract; the only auth the provider advertises is
+      WordPress application passwords over HTTP Basic. /.well-known/oauth-authorization-server
+      returns 404 on corporate.americangreetings.com.
+  - id: oidc
+    conforms: false
+    evidence: '/.well-known/openid-configuration returns 404 on corporate.americangreetings.com.'
+  - id: rfc9457
+    conforms: false
+    evidence: >-
+      Errors are served as application/json with the WordPress {code, message, data.status}
+      envelope, not application/problem+json. Observed on
+      GET /wp-json/wp/v2/nosuchthing -> 404.
+  - id: pagination
+    conforms: true
+    evidence: >-
+      Page-number pagination with page/per_page, plus X-WP-Total and X-WP-TotalPages response
+      headers and an RFC 5988 Link header carrying rel="next". Observed on
+      GET /wp-json/wp/v2/posts?per_page=2.
+  - id: idempotency
+    conforms: false
+    evidence: >-
+      No idempotency key parameter or header anywhere in the provider's route index, and none on
+      any observed response.
+  - id: rfc8594
+    conforms: false
+    evidence: No Deprecation or Sunset header on any observed response; no deprecation policy published.
+  - id: rfc9116
+    conforms: false
+    evidence: >-
+      /.well-known/security.txt returns 404 on corporate.americangreetings.com and is
+      indeterminate on api./www. (blanket Akamai 403 for every path).
+  - id: cors
+    conforms: true
+    evidence: >-
+      Access-Control-Expose-Headers and Access-Control-Allow-Headers are returned on wp/v2
+      responses, exposing X-WP-Total, X-WP-TotalPages and Link to browser clients.
+  - id: oembed
+    conforms: true
+    evidence: >-
+      The provider serves the oEmbed 1.0 namespace at /wp-json/oembed/1.0/embed and advertises an
+      oEmbed discovery link from its corporate pages. oEmbed is a real cross-site embedding
+      standard and this is a genuine implementation of it, albeit supplied by the WordPress platform.
+  - id: rss
+    conforms: true
+    evidence: 'https://corporate.americangreetings.com/feed/ returns 200 with a valid RSS 2.0 document.'
+  - id: sitemaps-org
+    conforms: true
+    evidence: 'https://corporate.americangreetings.com/sitemap_index.xml returns 200 with a valid sitemap index.'
+  - id: json-api
+    conforms: false
+    evidence: Responses are plain JSON arrays/objects, not JSON:API documents.
+  - id: odata
+    conforms: false
+    evidence: No $metadata surface on any host.
+  - id: scim
+    conforms: false
+    evidence: No SCIM schema URN anywhere in the contract; /wp/v2/users is not a SCIM surface.
+  - id: fhir
+    conforms: false
+    evidence: Not a healthcare provider.
+  - id: psd2
+    conforms: false
+    evidence: Not a financial institution.
+domain_standard:
+  market: Consumer social expression — greeting cards, gift packaging, party goods, digital greetings
+  standard_declared: null
+  conforms: false
+  evidence: >-
+    No domain interchange standard is declared anywhere in the contract. This market's business-to-
+    business integration runs on retail EDI (X12 850/810/856 purchase order, invoice and ship
+    notice traffic with mass-merchant customers), which is exchanged over private VANs and AS2
+    under bilateral trade agreements — it does not appear on any public American Greetings surface
+    and could not be probed. No X12, EDIFACT, GS1 or ISO message type is named in the contract, and
+    the greeting-card market has no public API standard equivalent to FHIR or PSD2. Recorded as a
+    genuine absence, not a failure: this is a reward-only check and there is no standard here to
+    reward.
+compliance_certifications: []
+compliance_note: >-
+  No trust centre, no SOC 2 / ISO 27001 / PCI / HIPAA / FedRAMP claim, and no compliance page on
+  any reachable American Greetings host. probe-security-programs.py returned vdp=none trust=none on
+  2026-09-02. No Compliance pointer is emitted, because there is nothing published to point at.
+maintainers:
+  - FN: Kin Lane
+    email: kin@apievangelist.com

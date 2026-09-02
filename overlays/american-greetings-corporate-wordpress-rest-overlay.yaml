@@ -1,0 +1,60 @@
+# generated: '2026-09-02'
+# method: generated
+# source: openapi/american-greetings-corporate-wordpress-rest-openapi.yml
+overlay: 1.0.0
+info:
+  title: American Greetings Corporate WordPress REST API — API Evangelist enhancements
+  version: 1.0.0
+extends: ./../openapi/american-greetings-corporate-wordpress-rest-openapi.yml
+actions:
+  - target: $.info
+    description: >-
+      Record the provenance of the base document and the operating facts an agent needs before it
+      calls anything. The base document was derived from the provider's own route index; American
+      Greetings publishes no OpenAPI.
+    update:
+      x-apievangelist-provenance:
+        derived_from: https://corporate.americangreetings.com/wp-json/
+        derived_on: '2026-09-02'
+        provider_publishes_openapi: false
+      x-agent-notes:
+        anonymous_read: All wp/v2 GET collections return 200 without credentials.
+        write_surface: Every write requires WordPress application-password credentials, not issued publicly.
+        first_party_entities: [Product, Brand]
+  - target: $.paths['/wp/v2/products'].get
+    description: Mark the American Greetings product catalogue as a first-party entity, not a WordPress platform one.
+    update:
+      x-first-party: true
+      x-entity: Product
+      description: >-
+        List American Greetings product lines. A custom post type defined by American Greetings,
+        carrying the corporate product catalogue (greeting cards, gift packaging, party supplies,
+        stationery, stickers and decals, digital greetings). 6 records observed 2026-09-02.
+  - target: $.paths['/wp/v2/brands'].get
+    description: Mark the American Greetings brand catalogue as a first-party entity.
+    update:
+      x-first-party: true
+      x-entity: Brand
+      description: >-
+        List the consumer brands in the American Greetings portfolio. A custom post type defined by
+        American Greetings. 6 records observed 2026-09-02.
+  - target: $.paths['/wp/v2/posts'].get
+    description: Describe the news collection and its incremental-sync parameter.
+    update:
+      x-entity: Post
+      description: >-
+        List American Greetings corporate press releases and news items — the machine-readable form
+        of corporate.americangreetings.com/latest-news/. 88 items observed 2026-09-02. Use
+        modified_after for incremental sync.
+  - target: $.components.schemas.RestError
+    description: Point the error schema at the observed catalogue.
+    update:
+      x-error-catalog: errors/american-greetings-problem-types.yml
+      x-rfc9457: false
+  - target: $.components.securitySchemes.applicationPassword
+    description: State plainly that these credentials are not publicly obtainable.
+    update:
+      x-public-signup: false
+      x-note: >-
+        American Greetings operates no developer programme and issues no API credentials to the
+        public. Application passwords exist only for accounts on the corporate WordPress install.

@@ -1,0 +1,95 @@
+generated: '2026-09-02'
+method: derived
+source: >-
+  Derived from openapi/american-greetings-corporate-wordpress-rest-openapi.yml. No American
+  Greetings MCP server exists.
+specification: API Commons MCPServer
+specificationVersion: '0.1'
+provider: American Greetings
+providerId: american-greetings
+status: candidate
+description: >-
+  American Greetings ships no Model Context Protocol server — hosted or local. This artifact is a
+  CANDIDATE tool set derived from the read-only surface of the company's corporate WordPress REST
+  API, recording what an MCP server over that API would expose if anyone built one. Nothing here is
+  callable today.
+deployment:
+  mode: none
+  endpoint: null
+  install: null
+  package: null
+  auth: none
+  verified: derived
+  note: >-
+    Searched for a hosted endpoint and for a published stdio package; found neither. The company
+    has no developer programme, no npm/PyPI presence, and its GitHub organisation
+    (github.com/aginteractive) holds two Gradle build plugins last pushed in 2021 and nothing
+    MCP-related. mode is "none" because nobody ships a server, not because one was missed.
+discovery_probes:
+  - url: https://corporate.americangreetings.com/.well-known/ai-plugin.json
+    status: 404
+  - url: https://corporate.americangreetings.com/.well-known/agent-card.json
+    status: 404
+  - url: https://api.americangreetings.com/.well-known/ai-plugin.json
+    status: 403
+    note: Blanket Akamai bot 403 on every path for this host, including "/". Indeterminate.
+candidate_tools:
+  - name: list_american_greetings_products
+    description: List the American Greetings product lines published on the corporate site.
+    rest: get_wp_v2_products
+    method: GET
+    path: /wp/v2/products
+    read_only: true
+  - name: get_american_greetings_product
+    description: Fetch one American Greetings product line by id.
+    rest: get_wp_v2_products_id
+    method: GET
+    path: /wp/v2/products/{id}
+    read_only: true
+  - name: list_american_greetings_brands
+    description: List the consumer brands in the American Greetings portfolio.
+    rest: get_wp_v2_brands
+    method: GET
+    path: /wp/v2/brands
+    read_only: true
+  - name: get_american_greetings_brand
+    description: Fetch one American Greetings brand record by id.
+    rest: get_wp_v2_brands_id
+    method: GET
+    path: /wp/v2/brands/{id}
+    read_only: true
+  - name: search_american_greetings_news
+    description: >-
+      Search American Greetings corporate press releases and news items. Supports search, after,
+      before, categories and page/per_page.
+    rest: get_wp_v2_posts
+    method: GET
+    path: /wp/v2/posts
+    read_only: true
+  - name: get_american_greetings_news_item
+    description: Fetch one American Greetings press release or news item by id.
+    rest: get_wp_v2_posts_id
+    method: GET
+    path: /wp/v2/posts/{id}
+    read_only: true
+  - name: list_american_greetings_media
+    description: >-
+      List media library items — product imagery, brand marks and press photography — with
+      source_url and media_details.
+    rest: get_wp_v2_media
+    method: GET
+    path: /wp/v2/media
+    read_only: true
+  - name: get_american_greetings_page
+    description: Fetch a corporate page (about, brands, products, careers, locations) by id.
+    rest: get_wp_v2_pages_id
+    method: GET
+    path: /wp/v2/pages/{id}
+    read_only: true
+notes: >-
+  Write operations are deliberately excluded from this candidate set: every write on this API
+  requires WordPress application-password credentials, has no idempotency key, and — for taxonomy
+  terms — is irreversible. See conventions/american-greetings-conventions.yml.
+maintainers:
+  - FN: Kin Lane
+    email: kin@apievangelist.com

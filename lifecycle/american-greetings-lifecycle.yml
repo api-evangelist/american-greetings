@@ -1,0 +1,54 @@
+generated: '2026-09-02'
+method: probed
+source: >-
+  https://corporate.americangreetings.com/wp-json/ route index and sitemap crawl of
+  corporate.americangreetings.com, 2026-09-02
+specification: API Commons Lifecycle
+specificationVersion: '0.1'
+provider: American Greetings
+providerId: american-greetings
+description: >-
+  American Greetings operates no developer programme, so there is no versioning policy, no
+  deprecation policy, no SLA and no status page to record. This artifact records that absence
+  against evidence rather than leaving it unstated, and captures the one real versioning signal
+  the company does emit — the namespace version in its corporate WordPress REST API.
+versioning:
+  scheme: path-namespace
+  current_version: wp/v2
+  discovery: https://corporate.americangreetings.com/wp-json/
+  policy_published: false
+  note: >-
+    wp/v2 is a WordPress platform namespace, not an American Greetings product version. The company
+    makes no statement about when or whether it would move off it, and there is no changelog, no
+    release notes and no version header.
+deprecation:
+  policy_published: false
+  sunset_header: false
+  deprecation_header: false
+  rfc8594: false
+  deprecated_operations: []
+  evidence: >-
+    No Deprecation or Sunset header appeared on any observed response, and no operation in the
+    provider's route index carries a deprecation marker.
+status_page:
+  published: false
+  url: null
+  evidence: >-
+    No status.americangreetings.com and no status page linked from any of the 20 pages in
+    https://corporate.americangreetings.com/page-sitemap.xml.
+sla:
+  published: false
+  url: null
+  note: >-
+    No public API terms of any kind. Retail and licensing relationships are governed by bilateral
+    trade agreements, not by a published service level.
+support:
+  channel: https://corporate.americangreetings.com/about-us/contact-us/
+  type: corporate-contact-form
+  note: General corporate contact, not developer support. There is no developer support channel.
+notes: >-
+  developer.americangreetings.com, which this repo previously carried as the developer portal, does
+  not resolve (NXDOMAIN, 2026-09-02) and has been removed from apis.yml.
+maintainers:
+  - FN: Kin Lane
+    email: kin@apievangelist.com

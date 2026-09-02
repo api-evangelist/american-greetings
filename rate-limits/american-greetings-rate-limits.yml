@@ -4,41 +4,67 @@ schema: https://raw.githubusercontent.com/api-evangelist/interface-research/main
 provider: American Greetings
 providerId: american-greetings
 created: '2026-05-04'
-# Provenance stamped 2026-08-11: this artifact was written by the API Evangelist
-# bulk sweep dated 2026-05-04, not harvested from the provider. See roadmap#35.
-method: generated
-modified: '2026-05-05'
+modified: '2026-09-02'
+generated: '2026-09-02'
+method: probed
+source: >-
+  Response headers observed on https://corporate.americangreetings.com/wp-json/wp/v2/* on
+  2026-09-02, plus a sitemap crawl of corporate.americangreetings.com finding no published limits
 reconciled: false
+limit_count: 0
 tags:
   - Greeting Cards
   - Gift Wrap
   - Celebration
   - Rate Limiting
 description: >-
-  American Greetings does not publish public API rate limits. Reconcile when public limits are published.
+  American Greetings publishes no API rate limits, and its one public API returns no rate-limit
+  signal on the wire. This artifact records that against evidence: limit_count is 0 because there
+  is nothing published, not because nothing was checked.
 notes: >-
-  American Greetings is a consumer-products company; it does not publish a public API developer portal with documented pricing or rate limits. Retail trading-partner EDI and Creatacard / SmashUps consumer products are sold direct rather than via a priced API. Reconcile if a public API is launched.
-sources:
-  - https://www.americangreetings.com
+  Upgraded 2026-09-02 from a 2026-05-04 bulk-sweep scaffold to a probed record. The company runs no
+  developer programme; the only reachable API is the corporate WordPress REST API on WordPress VIP.
+  Retail trading-partner integration runs on private EDI under bilateral agreements and has no
+  public rate-limit surface.
+observed_headers:
+  rate_limit_headers: []
+  note: >-
+    No RateLimit-*, X-RateLimit-* or Retry-After header appeared on any observed response. The
+    response headers that ARE returned are pagination and cache diagnostics, not throttling signal.
+  present_instead:
+    - X-WP-Total
+    - X-WP-TotalPages
+    - Link
+    - Cache-Control
+    - X-Cache
+    - X-RQ
+  evidence: 'GET https://corporate.americangreetings.com/wp-json/wp/v2/posts?per_page=2 -> 200'
 responseCodes:
-  throttled: 429
-  serviceUnavailable: 503
-limits:
-  - name: Undocumented - bilateral agreement
-    scope: contract
-    metric: varies
-    limit: 'see partner agreement; not publicly documented'
+  throttled: null
+  serviceUnavailable: null
+  note: >-
+    No 429 was observed and none is documented. Do not assume 429 is the exhaustion code on this
+    API — it has not been demonstrated.
+limits: []
 policies:
   - name: Documentation Status
     description: >-
-      American Greetings does not publish public per-second or per-minute API rate
-      limits. Throughput, concurrency, and burst behavior are governed by the
-      relevant partner, supplier, or merchant agreement.
+      No published per-second, per-minute or per-day limit on any American Greetings surface. The
+      corporate site's 20 indexed pages contain no developer or API section.
+  - name: Observed Ceilings
+    description: >-
+      The only enforced ceiling found is a pagination one, declared in the provider's own route
+      index: per_page has minimum 1 and maximum 100 on wp/v2 collections. That is a page-size cap,
+      not a rate limit.
   - name: Backoff Strategy
     description: >-
-      Where any HTTP API is exposed, clients should implement exponential
-      backoff with jitter and honor any Retry-After header returned on 429
-      or 503 responses.
+      Because no limit is published and no throttling header is returned, a client cannot know when
+      it is close to a ceiling. Keep request rates modest, serialise rather than parallelise, and
+      apply exponential backoff with jitter on any 429, 503 or edge 403 — the Akamai edge in front
+      of the company's other hosts already returns 403 to unfamiliar clients.
+sources:
+  - https://corporate.americangreetings.com/wp-json/
+  - https://corporate.americangreetings.com/page-sitemap.xml
 maintainers:
   - FN: Kin Lane
     email: kin@apievangelist.com

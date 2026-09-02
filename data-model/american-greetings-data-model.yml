@@ -1,0 +1,152 @@
+generated: '2026-09-02'
+method: derived
+source: >-
+  openapi/american-greetings-corporate-wordpress-rest-openapi.yml and the per-resource OPTIONS
+  schemas fetched from https://corporate.americangreetings.com/wp-json/wp/v2/*
+specification: API Commons DataModel
+specificationVersion: '0.1'
+provider: American Greetings
+providerId: american-greetings
+api: American Greetings Corporate WordPress REST API
+description: >-
+  Entity graph of the American Greetings corporate content API, derived from the response schemas
+  the host returns on OPTIONS for each collection. Two of these entities are American Greetings'
+  own: Product and Brand are custom post types the company defined, and they carry the corporate
+  product-line and brand catalogue. The rest are WordPress platform entities.
+identifiers:
+  scheme: integer
+  note: >-
+    Ids are per-site auto-increment integers with no type prefix. They are NOT portable between
+    American Greetings brand sites — post 1706 on corporate.americangreetings.com is unrelated to
+    post 1706 on carltoncards.ca. Every entity also carries a "slug" (URL-safe string) and a "link"
+    (absolute canonical URL), either of which is a safer cross-system key than the integer id.
+entities:
+  - name: Product
+    collection: /wp/v2/products
+    schema: '#/components/schemas/Product'
+    first_party: true
+    count_observed: 6
+    description: American Greetings product-line records (greeting cards, gift packaging, party supplies, stationery, stickers and decals, digital greetings).
+    key_fields: [id, slug, title, content, excerpt, featured_media, link, status, date, modified]
+  - name: Brand
+    collection: /wp/v2/brands
+    schema: '#/components/schemas/Brand'
+    first_party: true
+    count_observed: 6
+    description: American Greetings brand records — the company's portfolio of consumer brands.
+    key_fields: [id, slug, title, content, excerpt, featured_media, link, status, date, modified]
+  - name: Post
+    collection: /wp/v2/posts
+    schema: '#/components/schemas/Post'
+    first_party: false
+    count_observed: 88
+    description: Corporate press releases and news items; the machine-readable form of /latest-news/.
+    key_fields: [id, slug, title, content, excerpt, author, featured_media, categories, tags, date, modified, link]
+  - name: Page
+    collection: /wp/v2/pages
+    schema: '#/components/schemas/Page'
+    first_party: false
+    count_observed: 30
+    key_fields: [id, slug, title, content, parent, menu_order, link]
+  - name: Attachment
+    collection: /wp/v2/media
+    schema: '#/components/schemas/Attachment'
+    first_party: false
+    count_observed: 630
+    description: Media library — product imagery, brand marks, press photography.
+    key_fields: [id, slug, title, source_url, media_type, mime_type, media_details, post, alt_text]
+  - name: Category
+    collection: /wp/v2/categories
+    schema: '#/components/schemas/Category'
+    first_party: false
+    count_observed: 2
+    key_fields: [id, slug, name, count, parent, link]
+  - name: Tag
+    collection: /wp/v2/tags
+    schema: '#/components/schemas/Tag'
+    first_party: false
+    count_observed: 0
+    key_fields: [id, slug, name, count, link]
+  - name: User
+    collection: /wp/v2/users
+    schema: '#/components/schemas/User'
+    first_party: false
+    count_observed: 8
+    description: Content authors. Anonymous callers receive the public projection only.
+    key_fields: [id, slug, name, link, avatar_urls]
+  - name: Comment
+    collection: /wp/v2/comments
+    schema: '#/components/schemas/Comment'
+    first_party: false
+    count_observed: 0
+    key_fields: [id, post, parent, author, content, date, status]
+relationships:
+  - from: Post
+    to: User
+    type: belongs_to
+    via: author
+    description: post.author is a User id.
+  - from: Post
+    to: Attachment
+    type: belongs_to
+    via: featured_media
+    description: post.featured_media is an Attachment id; 0 means none.
+  - from: Post
+    to: Category
+    type: has_many
+    via: categories
+    description: Array of Category ids.
+  - from: Post
+    to: Tag
+    type: has_many
+    via: tags
+    description: Array of Tag ids.
+  - from: Page
+    to: Page
+    type: belongs_to
+    via: parent
+    description: Pages are hierarchical; parent is a Page id, 0 at the root.
+  - from: Page
+    to: Attachment
+    type: belongs_to
+    via: featured_media
+  - from: Product
+    to: Attachment
+    type: belongs_to
+    via: featured_media
+    description: The product-line image.
+  - from: Brand
+    to: Attachment
+    type: belongs_to
+    via: featured_media
+    description: The brand mark.
+  - from: Attachment
+    to: Post
+    type: belongs_to
+    via: post
+    description: The object the media item was uploaded to, when it was uploaded in context.
+  - from: Comment
+    to: Post
+    type: belongs_to
+    via: post
+  - from: Comment
+    to: Comment
+    type: belongs_to
+    via: parent
+    description: Threading; 0 at the root.
+  - from: Category
+    to: Category
+    type: belongs_to
+    via: parent
+    description: Categories are hierarchical.
+  - from: Post
+    to: Post
+    type: has_many
+    via: /wp/v2/posts/{parent}/revisions
+    description: Revision history, credential-gated.
+traversal_note: >-
+  Adding _embed to any collection or item request inlines the author, featured media and terms under
+  an _embedded key, which collapses the belongs_to hops above into a single round trip.
+maintainers:
+  - FN: Kin Lane
+    email: kin@apievangelist.com

@@ -1,0 +1,73 @@
+# American Greetings
+
+> American Greetings is a privately held US manufacturer of greeting cards, gift packaging, party
+> goods, stationery and digital greetings, headquartered in Westlake, Ohio. It operates no public
+> developer programme. The one machine-readable API it serves in public is the WordPress REST API
+> on its corporate site, which carries the company's brand and product catalogue alongside its
+> press releases.
+
+Generated: 2026-09-02
+Method: generated
+Source: apis.yml and the artifacts in this repository; every URL below was probed on 2026-09-02.
+
+## What is actually callable
+
+- [Corporate WordPress REST API root](https://corporate.americangreetings.com/wp-json/): the
+  provider's own machine-readable route index. 586 routes across 23 namespaces; `wp/v2` is the
+  content namespace. Returns 200 anonymously.
+- [Products](https://corporate.americangreetings.com/wp-json/wp/v2/products): American Greetings
+  product lines. A first-party custom post type, 6 records.
+- [Brands](https://corporate.americangreetings.com/wp-json/wp/v2/brands): the American Greetings
+  consumer brand portfolio. A first-party custom post type, 6 records.
+- [Press releases and news](https://corporate.americangreetings.com/wp-json/wp/v2/posts): 88 items,
+  filterable by `search`, `after`, `before`, `modified_after` and `categories`.
+- [Media library](https://corporate.americangreetings.com/wp-json/wp/v2/media): 630 items —
+  product imagery, brand marks, press photography.
+- [Corporate pages](https://corporate.americangreetings.com/wp-json/wp/v2/pages): 30 items.
+- [oEmbed](https://corporate.americangreetings.com/wp-json/oembed/1.0/embed): oEmbed 1.0 discovery.
+- [RSS feed](https://corporate.americangreetings.com/feed/): recent corporate news.
+
+All GET collections above are readable without credentials. Every write operation requires
+WordPress application-password credentials, which American Greetings does not issue publicly.
+
+## Contracts and artifacts in this repository
+
+- [OpenAPI 3.1 (derived)](openapi/american-greetings-corporate-wordpress-rest-openapi.yml): 163
+  paths, 334 operations. Derived mechanically from the provider's own route index and per-resource
+  OPTIONS schemas. American Greetings publishes no OpenAPI of its own.
+- [Provider route index (verbatim)](openapi/_original/american-greetings-corporate-wp-json-index.json)
+- [Authentication](authentication/american-greetings-authentication.yml)
+- [Conventions, including reversibility](conventions/american-greetings-conventions.yml)
+- [Error catalogue](errors/american-greetings-problem-types.yml)
+- [Data model](data-model/american-greetings-data-model.yml)
+- [Lifecycle](lifecycle/american-greetings-lifecycle.yml)
+- [Conformance](conformance/american-greetings-conformance.yml)
+- [MCP candidate tool set](mcp/american-greetings-mcp.yml)
+- [Agent skills](skills/_index.yml)
+- [Well-known probe record](well-known/american-greetings-well-known.yml)
+- [Domain security probe](security/american-greetings-domain-security.yml)
+
+## Company
+
+- [Corporate site](https://corporate.americangreetings.com/)
+- [Brands](https://corporate.americangreetings.com/brands/)
+- [Products](https://corporate.americangreetings.com/products/)
+- [Latest news](https://corporate.americangreetings.com/latest-news/)
+- [Contact](https://corporate.americangreetings.com/about-us/contact-us/)
+- [Careers](https://corporate.americangreetings.com/careers/)
+- [GitHub (AG Interactive)](https://github.com/aginteractive)
+- [LinkedIn](https://www.linkedin.com/company/american-greetings)
+
+## What does not exist
+
+Recorded so an agent stops looking rather than guessing:
+
+- No developer portal. `developer.americangreetings.com` does not resolve (NXDOMAIN, 2026-09-02).
+- No published OpenAPI, AsyncAPI, GraphQL schema, gRPC/protobuf or WSDL.
+- No MCP server, hosted or stdio. No A2A agent card at either well-known path.
+- No SDK or client library in any public package registry.
+- No API pricing, no published rate limits, no status page, no changelog, no sandbox, no CLI.
+- No security.txt, no vulnerability disclosure programme, no trust centre, no compliance claims.
+- `www.americangreetings.com` and `api.americangreetings.com` return an Akamai "Access Denied" 403
+  to every non-browser client on every path, including the site root. Nothing about what those
+  hosts serve can be determined programmatically.

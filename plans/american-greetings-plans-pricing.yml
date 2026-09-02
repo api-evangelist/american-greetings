@@ -6,8 +6,10 @@ providerId: american-greetings
 created: '2026-05-04'
 # Provenance stamped 2026-08-11: this artifact was written by the API Evangelist
 # bulk sweep dated 2026-05-04, not harvested from the provider. See roadmap#35.
-method: generated
-modified: '2026-05-05'
+method: searched
+generated: '2026-09-02'
+modified: '2026-09-02'
+plan_count: 0
 reconciled: false
 tags:
   - Greeting Cards
@@ -16,9 +18,13 @@ tags:
 description: >-
   American Greetings does not publish public API plans or pricing. Retail and licensing relationships are governed by trade agreements rather than a public API price list. This artifact remains a scaffold pending publication of a public API commercial offering.
 notes: >-
+  Re-checked 2026-09-02: crawled all 20 pages in the corporate sitemap and the 586-route
+  /wp-json/ index; there is no pricing page, no plans surface and no machine-readable price
+  catalogue anywhere on a reachable American Greetings host. plan_count is 0 as a measured result.
   American Greetings is a consumer-products company; it does not publish a public API developer portal with documented pricing or rate limits. Retail trading-partner EDI and Creatacard / SmashUps consumer products are sold direct rather than via a priced API. Reconcile if a public API is launched.
 sources:
-  - https://www.americangreetings.com
+  - https://corporate.americangreetings.com/page-sitemap.xml
+  - https://corporate.americangreetings.com/wp-json/
 plans:
   - id: american-greetings-overview
     name: American Greetings - Pricing Overview

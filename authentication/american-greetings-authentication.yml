@@ -1,0 +1,14 @@
+generated: '2026-09-02'
+method: derived
+source: openapi/american-greetings-corporate-wordpress-rest-openapi.yml
+summary:
+  types:
+  - http
+schemes:
+- name: applicationPassword
+  type: http
+  scheme: basic
+  description: WordPress application passwords. Authorization endpoint advertised by the provider
+    at https://corporate.americangreetings.com/wp-admin/authorize-application.php
+  sources:
+  - openapi/american-greetings-corporate-wordpress-rest-openapi.yml

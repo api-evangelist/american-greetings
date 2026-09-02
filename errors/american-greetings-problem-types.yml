@@ -1,0 +1,84 @@
+generated: '2026-09-02'
+method: probed
+source: >-
+  Live error responses observed on https://corporate.americangreetings.com/wp-json/ on 2026-09-02,
+  cross-checked against openapi/american-greetings-corporate-wordpress-rest-openapi.yml
+specification: API Commons ErrorCatalog
+specificationVersion: '0.1'
+provider: American Greetings
+providerId: american-greetings
+api: American Greetings Corporate WordPress REST API
+format: wordpress-rest-error
+rfc9457: false
+description: >-
+  American Greetings publishes no error reference of its own. This catalogue records the error
+  envelope actually returned by the company's corporate WordPress REST API, captured by sending
+  real requests to the live host. The envelope is the WordPress REST error object, not RFC 9457
+  application/problem+json: the media type is application/json and the shape is
+  {code, message, data:{status}}. The HTTP status is duplicated inside data.status.
+envelope:
+  media_type: application/json
+  fields:
+    - name: code
+      type: string
+      description: Machine-readable error slug. Stable across requests; this is the field to branch on.
+    - name: message
+      type: string
+      description: Human-readable message. Not stable — do not parse.
+    - name: data.status
+      type: integer
+      description: The HTTP status code, repeated inside the body.
+  example: '{"code":"rest_no_route","message":"No route was found matching the URL and request method.","data":{"status":404}}'
+problem_types:
+  - code: rest_no_route
+    status: 404
+    title: No route was found matching the URL and request method
+    observed: true
+    evidence: 'GET https://corporate.americangreetings.com/wp-json/wp/v2/nosuchthing -> 404'
+    remediation: >-
+      Re-read the route index at /wp-json/ and confirm both the path and the HTTP method. A path that
+      exists for GET may not exist for POST; the index lists the methods each route accepts.
+  - code: rest_post_invalid_id
+    status: 404
+    title: Invalid post ID
+    observed: true
+    evidence: 'GET https://corporate.americangreetings.com/wp-json/wp/v2/posts/999999 -> 404'
+    remediation: >-
+      The identifier does not resolve to a readable object. List the collection first and use an id
+      returned by it; ids are per-site integers and are not portable between American Greetings brand sites.
+  - code: rest_cannot_create
+    status: 401
+    title: Sorry, you are not allowed to create posts as this user
+    observed: true
+    evidence: 'POST https://corporate.americangreetings.com/wp-json/wp/v2/posts (anonymous) -> 401'
+    remediation: >-
+      Every write operation requires WordPress application-password credentials sent as HTTP Basic.
+      Anonymous clients are read-only on this API. Note the status is 401, not 403, for an
+      unauthenticated caller.
+  - code: rest_forbidden
+    status: 403
+    title: Sorry, you are not allowed to do that
+    observed: false
+    evidence: >-
+      Not triggered anonymously during this pass; documented here because it is the standard
+      WordPress code for an authenticated caller whose capabilities are insufficient, and clients
+      must distinguish it from rest_cannot_create.
+    remediation: The credential is valid but lacks the capability. Escalation is an account change, not a retry.
+  - code: rest_invalid_param
+    status: 400
+    title: Invalid parameter(s)
+    observed: false
+    evidence: >-
+      Declared by the provider's own route index — every argument in the /wp-json/ index carries a
+      type, enum, minimum and maximum that the server validates — but not deliberately triggered in
+      this pass.
+    remediation: >-
+      data.params names the offending parameter. Check it against the enum/minimum/maximum recorded
+      for that argument in the derived OpenAPI.
+notes: >-
+  There is no error catalogue on any American Greetings web property; www.americangreetings.com is
+  behind a blanket Akamai bot 403 and corporate.americangreetings.com carries no developer section.
+  Everything above was either observed on the wire or read out of the provider's published route index.
+maintainers:
+  - FN: Kin Lane
+    email: kin@apievangelist.com

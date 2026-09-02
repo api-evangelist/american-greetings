@@ -1,0 +1,96 @@
+generated: '2026-09-02'
+method: probed
+source: direct HTTP probes of each American Greetings host, 2026-09-02
+specification: API Commons WellKnown
+specificationVersion: '0.1'
+provider: American Greetings
+providerId: american-greetings
+description: >-
+  Named /.well-known/ path probe across every American Greetings host known to this repo. No path
+  returned a document on any host. corporate.americangreetings.com (WordPress VIP) answers a real
+  404 for every path. api.americangreetings.com and www.americangreetings.com sit behind an Akamai
+  edge policy that returns an identical "Access Denied" 403 HTML body to every non-browser client
+  for every path, including the site root — the 403 is a blanket bot policy, not a per-path finding,
+  so nothing can be concluded about what those hosts do or do not serve at these paths.
+  No WellKnown or SecurityTxt pointer is emitted, because no path returned a real document.
+notes: >-
+  developer.americangreetings.com, the humanURL previously carried in apis.yml, does not resolve at
+  all (NXDOMAIN as of 2026-09-02) and was therefore not probed.
+hosts:
+  - host: corporate.americangreetings.com
+    note: WordPress VIP corporate site; genuine 404s, so these are real recorded absences.
+    documents:
+      - path: /.well-known/security.txt
+        status: 404
+        file: null
+      - path: /.well-known/openid-configuration
+        status: 404
+        file: null
+      - path: /.well-known/oauth-authorization-server
+        status: 404
+        file: null
+      - path: /.well-known/api-catalog
+        status: 404
+        file: null
+      - path: /.well-known/ai-plugin.json
+        status: 404
+        file: null
+      - path: /.well-known/agent-card.json
+        status: 404
+        file: null
+      - path: /.well-known/agent.json
+        status: 404
+        file: null
+  - host: api.americangreetings.com
+    note: >-
+      Akamai edge returns the same "Access Denied" 403 HTML body for every path including "/",
+      so no path-level conclusion is possible.
+    documents:
+      - path: /.well-known/security.txt
+        status: 403
+        file: null
+      - path: /.well-known/openid-configuration
+        status: 403
+        file: null
+      - path: /.well-known/oauth-authorization-server
+        status: 403
+        file: null
+      - path: /.well-known/api-catalog
+        status: 403
+        file: null
+      - path: /.well-known/ai-plugin.json
+        status: 403
+        file: null
+      - path: /.well-known/agent-card.json
+        status: 403
+        file: null
+      - path: /.well-known/agent.json
+        status: 403
+        file: null
+  - host: www.americangreetings.com
+    note: Same Akamai blanket 403 as api.americangreetings.com.
+    documents:
+      - path: /.well-known/security.txt
+        status: 403
+        file: null
+      - path: /.well-known/openid-configuration
+        status: 403
+        file: null
+      - path: /.well-known/oauth-authorization-server
+        status: 403
+        file: null
+      - path: /.well-known/api-catalog
+        status: 403
+        file: null
+      - path: /.well-known/ai-plugin.json
+        status: 403
+        file: null
+      - path: /.well-known/agent-card.json
+        status: 403
+        file: null
+      - path: /.well-known/agent.json
+        status: 403
+        file: null
+maintainers:
+  - FN: Kin Lane
+    email: kin@apievangelist.com

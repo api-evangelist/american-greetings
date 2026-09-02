@@ -6,36 +6,79 @@ deliveryModel:
   model: unknown
   open_source: false
   commercial: false
-  callable_host: false
-  label: Delivery model not determined — needs a product licence on record
-  confidence: low
+  callable_host: true
+  label: No commercial API product; one anonymously callable corporate content API
+  confidence: medium
   source:
-  - none
-  generated: '2026-08-28'
-  method: derived
+  - https://corporate.americangreetings.com/wp-json/
+  generated: '2026-09-02'
+  method: probed
 accessModel:
-  pricing: unknown
-  onboarding: unknown
+  pricing: none
+  onboarding: none
   trial: false
-  try_now: false
-  public: false
-  label: Unknown
-  confidence: low
+  try_now: true
+  public: true
+  label: Public read-only content API, no signup, no published pricing
+  confidence: medium
   source:
   - plans
-  generated: '2026-07-22'
-  method: derived
+  - https://corporate.americangreetings.com/wp-json/wp/v2/products
+  generated: '2026-09-02'
+  method: probed
 image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/american-greetings.png
 tags:
   - Greeting Cards
   - Gift Wrap
   - Celebration
+  - Consumer Products
+  - Retail
+  - Stationery
+  - Party Supplies
+  - Digital Greetings
+  - Content API
+  - WordPress REST API
 description: >-
-  American Greetings is a major US corporation and Fortune 1000 company. The American Greetings API provides programmatic access to its platform services, data, and integrations for enterprise customers and partners.
+  American Greetings is a privately held American manufacturer and marketer of social expression
+  products — greeting cards, gift packaging, party goods, stationery, stickers and decals, and
+  digital greetings — headquartered in Westlake, Ohio, and selling through mass retail, grocery,
+  drug and specialty channels in North America and internationally. Its brand portfolio includes
+  American Greetings, Papyrus, Carlton Cards, Jacquie Lawson and Blue Mountain. The company
+  operates no public developer programme: there is no developer portal, no published API
+  documentation, no SDK in any package registry, and no API pricing. The one machine-readable API
+  it serves in public is the WordPress REST API on its corporate site, which exposes the company's
+  own brand and product-line catalogue as custom post types alongside its press releases and media
+  library, readable anonymously.
 created: '2026-04-19'
-modified: '2026-04-19'
+modified: '2026-09-02'
 specificationVersion: '0.23'
 apis:
+  - aid: american-greetings:american-greetings-corporate-wordpress-rest-api
+    name: American Greetings Corporate WordPress REST API
+    tags:
+      - Content API
+      - WordPress REST API
+      - Brands
+      - Products
+      - Press Releases
+    image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+    baseURL: https://corporate.americangreetings.com/wp-json
+    humanURL: https://corporate.americangreetings.com/
+    properties:
+      - url: openapi/american-greetings-corporate-wordpress-rest-openapi.yml
+        type: OpenAPI
+      - url: overlays/american-greetings-corporate-wordpress-rest-overlay.yaml
+        type: Overlay
+    description: >-
+      The WordPress REST API served by American Greetings from its corporate site. It advertises a
+      self-describing route index at /wp-json/ carrying 586 routes across 23 namespaces, of which
+      wp/v2 is the public content namespace. Two of its entities are American Greetings' own
+      custom post types — /wp/v2/products, the corporate product-line catalogue, and /wp/v2/brands,
+      the consumer brand portfolio — alongside press releases, corporate pages, a 630-item media
+      library, categories, tags and authors. All GET collections are readable without credentials;
+      every write requires WordPress application-password credentials that the company does not
+      issue publicly. American Greetings publishes no OpenAPI of its own; the description in this
+      repository was derived from the provider's route index and per-resource OPTIONS schemas.
   - aid: american-greetings:american-greetings-api
     name: American Greetings API
     tags:
@@ -44,15 +87,47 @@ apis:
       - Celebration
     image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
     baseURL: https://api.americangreetings.com
-    humanURL: https://developer.americangreetings.com
-    properties:
-      - url: https://developer.americangreetings.com/docs
-        type: Documentation
     description: >-
-      The American Greetings API provides access to platform services and data for enterprise integration and automation.
+      An api. host that resolves through Akamai but returns an identical "Access Denied" 403 HTML
+      body to every non-browser client on every path, including the site root. No documentation,
+      no contract and no developer portal was found for it; nothing about what it serves can be
+      determined programmatically. Retained as an observed host, not as a documented API. The
+      humanURL and Documentation pointer previously carried here both referenced
+      developer.americangreetings.com, which does not resolve (NXDOMAIN, verified 2026-09-02), and
+      were removed.
 common:
+  - type: Authentication
+    url: authentication/american-greetings-authentication.yml
+  - type: Conventions
+    url: conventions/american-greetings-conventions.yml
+  - type: ErrorCatalog
+    url: errors/american-greetings-problem-types.yml
+  - type: DataModel
+    url: data-model/american-greetings-data-model.yml
+  - type: Lifecycle
+    url: lifecycle/american-greetings-lifecycle.yml
+  - type: Conformance
+    url: conformance/american-greetings-conformance.yml
+  - type: AgentSkill
+    url: skills/_index.yml
+  - type: LLMsTxt
+    url: llms/american-greetings-llms.txt
+  - type: Plans
+    url: plans/american-greetings-plans-pricing.yml
+  - type: RateLimits
+    url: rate-limits/american-greetings-rate-limits.yml
+  - type: FinOps
+    url: finops/american-greetings-finops.yml
   - type: DomainSecurity
     url: security/american-greetings-domain-security.yml
+  - type: GitHubOrganization
+    url: https://github.com/aginteractive
+  - type: Blog
+    url: https://corporate.americangreetings.com/latest-news/
+  - type: BlogRSS
+    url: https://corporate.americangreetings.com/feed/
+  - type: Support
+    url: https://corporate.americangreetings.com/about-us/contact-us/
   - type: LinkedIn
     url: https://www.linkedin.com/company/american-greetings
   - type: Website
@@ -60,3 +135,8 @@ common:
 maintainers:
   - FN: Kin Lane
     email: kin@apievangelist.com
+x-enrichment:
+  date: '2026-09-02'
+  status: enriched
+  artifacts_added: 16
+  pass: local-v1

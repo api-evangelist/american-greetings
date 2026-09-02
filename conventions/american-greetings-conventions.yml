@@ -1,0 +1,181 @@
+generated: '2026-09-02'
+method: probed
+source: >-
+  Response headers and bodies observed on https://corporate.americangreetings.com/wp-json/ on
+  2026-09-02, plus the provider's own route index and per-resource OPTIONS schemas
+specification: API Commons Conventions
+specificationVersion: '0.1'
+provider: American Greetings
+providerId: american-greetings
+api: American Greetings Corporate WordPress REST API
+description: >-
+  Cross-cutting runtime semantics for the only machine-readable API American Greetings serves in
+  public: the WordPress REST API on its corporate site. Every value below was read off a live
+  response or out of the provider's own route index — American Greetings publishes no developer
+  documentation, so nothing here is quoted from a docs page.
+authentication:
+  style: http-basic
+  scheme: WordPress application passwords
+  anonymous_access: >-
+    All wp/v2 GET collections and items tested (posts, pages, media, categories, tags, users,
+    comments, products, brands) return 200 to an anonymous client.
+  authorization_endpoint: https://corporate.americangreetings.com/wp-admin/authorize-application.php
+  advertised_at: https://corporate.americangreetings.com/wp-json/ (the "authentication" key of the route index)
+  see: authentication/american-greetings-authentication.yml
+idempotency:
+  supported: false
+  header: null
+  scope: null
+  retention: null
+  note: >-
+    No idempotency key is accepted or advertised anywhere in the route index, and no idempotency
+    header appears on any observed response. Writes are plain POST/PUT/PATCH/DELETE. A client that
+    retries a POST after a timeout will create a duplicate object. PUT/PATCH on an existing id are
+    naturally idempotent; POST to a collection is not.
+pagination:
+  style: page-number
+  request_params:
+    - name: page
+      default: 1
+      minimum: 1
+    - name: per_page
+      default: 10
+      minimum: 1
+      maximum: 100
+    - name: offset
+      note: Accepted on most collections as an alternative to page.
+  response_headers:
+    - name: X-WP-Total
+      description: Total number of items in the collection.
+      observed_example: 'x-wp-total: 88 on /wp/v2/posts'
+    - name: X-WP-TotalPages
+      description: Total number of pages at the requested per_page.
+      observed_example: 'x-wp-totalpages: 44 on /wp/v2/posts?per_page=2'
+    - name: Link
+      description: RFC 5988 link header carrying rel="next" and rel="prev".
+      observed_example: '<https://corporate.americangreetings.com/wp-json/wp/v2/posts?per_page=2&page=2>; rel="next"'
+  cors_note: >-
+    Access-Control-Expose-Headers lists X-WP-Total, X-WP-TotalPages and Link, so browser clients can
+    read the pagination signal cross-origin.
+field_selection:
+  sparse_fields:
+    param: _fields
+    description: Comma-separated allowlist of top-level response fields.
+  embedding:
+    param: _embed
+    description: Inlines linked resources (author, featured media, terms) under _embedded.
+  context:
+    param: context
+    values: [view, embed, edit]
+    default: view
+    description: >-
+      Selects the field set. "edit" requires authentication and returns 401 to an anonymous caller.
+  envelope:
+    param: _envelope
+    description: Wraps body, status and headers into a single JSON object for transports that cannot read headers.
+metadata:
+  supported: true
+  field: meta
+  note: Per-object key/value bag; which keys are exposed is decided server-side per post type.
+request_tracing:
+  request_id_header: null
+  observed_headers: [x-cache, x-rq]
+  note: >-
+    No client-correlatable request id is returned. x-rq and x-cache are WordPress VIP / edge cache
+    diagnostics, not a trace id a caller can supply or quote in a support ticket.
+versioning:
+  style: path-namespace
+  current: wp/v2
+  discovery: https://corporate.americangreetings.com/wp-json/
+  note: >-
+    The route index enumerates 23 namespaces; wp/v2 is the content namespace and the only one with
+    a documented public contract. There is no dated API version, no version header, and no
+    provider-published version policy.
+error_envelope:
+  media_type: application/json
+  shape: '{code, message, data:{status}}'
+  rfc9457: false
+  see: errors/american-greetings-problem-types.yml
+rate_limit_signaling:
+  headers: []
+  status_on_exhaustion: null
+  note: >-
+    No RateLimit-*, X-RateLimit-* or Retry-After header appeared on any observed response, and no
+    limit is published. See rate-limits/american-greetings-rate-limits.yml.
+reversibility:
+  applicable: true
+  grade: documented
+  summary: >-
+    The API has a real write surface, and WordPress's trash model gives most deletes a reversal
+    path that is visible in the provider's own route index. No window is stated anywhere by
+    American Greetings, so this grades "documented", not "verified" — a client cannot learn from
+    anything the company publishes how long a trashed object stays restorable.
+  surfaces:
+    - write_operation: delete_wp_v2_posts_id
+      path: /wp/v2/posts/{id}
+      method: DELETE
+      reversal: >-
+        A DELETE without force=true moves the post to status "trash" rather than removing it; the
+        object is restored by PATCH /wp/v2/posts/{id} with status set back to publish or draft.
+      reversal_operation: patch_wp_v2_posts_id
+      window: null
+      window_source: null
+      note: >-
+        DELETE with force=true is irreversible and permanently removes the object. The force
+        parameter is declared in the provider's route index for this operation.
+    - write_operation: delete_wp_v2_pages_id
+      path: /wp/v2/pages/{id}
+      method: DELETE
+      reversal: Same trash-then-restore model as posts; force=true is irreversible.
+      reversal_operation: patch_wp_v2_pages_id
+      window: null
+      window_source: null
+    - write_operation: delete_wp_v2_products_id
+      path: /wp/v2/products/{id}
+      method: DELETE
+      reversal: Same trash-then-restore model; American Greetings product records are a custom post type.
+      reversal_operation: patch_wp_v2_products_id
+      window: null
+      window_source: null
+    - write_operation: delete_wp_v2_brands_id
+      path: /wp/v2/brands/{id}
+      method: DELETE
+      reversal: Same trash-then-restore model; American Greetings brand records are a custom post type.
+      reversal_operation: patch_wp_v2_brands_id
+      window: null
+      window_source: null
+    - write_operation: delete_wp_v2_media_id
+      path: /wp/v2/media/{id}
+      method: DELETE
+      reversal: >-
+        The route index declares the same force parameter here as on posts — "Whether to bypass
+        Trash and force deletion", default false — so a plain DELETE is described as trashing
+        rather than destroying. Whether an attachment on this install actually lands in a
+        restorable trash state was not verified, because every write is credential-gated.
+      reversal_operation: patch_wp_v2_media_id
+      window: null
+      window_source: null
+      confidence: low
+    - write_operation: delete_wp_v2_categories_id
+      path: /wp/v2/categories/{id}
+      method: DELETE
+      reversal: none
+      reversal_operation: null
+      window: null
+      note: >-
+        Irreversible. The provider's own route index says of the force parameter on this operation:
+        "Required to be true, as terms do not support trashing." Deleting a category or tag through
+        this API destroys it outright.
+dry_run_mode:
+  supported: false
+  note: >-
+    No preview, validate-only or dry-run parameter is declared on any write operation in the route index.
+cross_links:
+  errors: errors/american-greetings-problem-types.yml
+  lifecycle: lifecycle/american-greetings-lifecycle.yml
+  authentication: authentication/american-greetings-authentication.yml
+  rate_limits: rate-limits/american-greetings-rate-limits.yml
+  data_model: data-model/american-greetings-data-model.yml
+maintainers:
+  - FN: Kin Lane
+    email: kin@apievangelist.com

@@ -1,0 +1,21 @@
+generated: '2026-09-02'
+method: generated
+source: openapi/american-greetings-corporate-wordpress-rest-openapi.yml
+provider: American Greetings
+providerId: american-greetings
+description: >-
+  Packaged agent skills for the only public American Greetings API surface — the corporate
+  WordPress REST API. Both skills are read-only, because the API's entire write surface is
+  credential-gated and American Greetings issues no public credentials.
+skills:
+  - name: american-greetings-brand-and-product-catalog
+    file: skills/american-greetings-brand-and-product-catalog.md
+    api: American Greetings Corporate WordPress REST API
+    operations: [get_wp_v2_brands, get_wp_v2_brands_id, get_wp_v2_products, get_wp_v2_products_id, get_wp_v2_media]
+  - name: american-greetings-corporate-news
+    file: skills/american-greetings-corporate-news.md
+    api: American Greetings Corporate WordPress REST API
+    operations: [get_wp_v2_posts, get_wp_v2_posts_id, get_wp_v2_categories, get_wp_v2_users, get_wp_v2_media]
+maintainers:
+  - FN: Kin Lane
+    email: kin@apievangelist.com

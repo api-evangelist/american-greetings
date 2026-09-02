@@ -1,0 +1,67 @@
+generated: '2026-09-02'
+method: searched
+source: >-
+  Registry searches on 2026-09-02 across npm, PyPI, Maven Central, RubyGems, crates.io, pkg.go.dev,
+  NuGet and Packagist, plus the GitHub organisation github.com/aginteractive
+specification: API Commons Packages
+specificationVersion: '0.1'
+provider: American Greetings
+providerId: american-greetings
+package_count: 0
+sdk_count: 0
+description: >-
+  American Greetings publishes no client library, SDK or API package in any public registry. This
+  is a recorded absence, not an unchecked one. No Packages or SDKs pointer is emitted in apis.yml,
+  because there is nothing to point at.
+packages: []
+searches:
+  - registry: maven
+    query: 'g:com.americangreetings'
+    endpoint: https://search.maven.org/solrsearch/select
+    results: 0
+  - registry: maven
+    query: 'sauce-connect AND americangreetings'
+    endpoint: https://search.maven.org/solrsearch/select
+    results: 0
+  - registry: npm
+    query: americangreetings
+    endpoint: https://registry.npmjs.org/-/v1/search
+    results: 0
+    note: No package published by or for American Greetings.
+  - registry: pypi
+    query: americangreetings
+    endpoint: https://pypi.org/pypi/americangreetings/json
+    results: 0
+related_repositories:
+  - name: aginteractive/Gradle-Sauce-Connect-Plugin
+    url: https://github.com/aginteractive/Gradle-Sauce-Connect-Plugin
+    org: https://github.com/aginteractive
+    official: true
+    sdk: false
+    language: Groovy
+    version: null
+    published: null
+    last_pushed: '2021-06-04'
+    note: >-
+      A Gradle build plugin for the Sauce Labs Sauce Connect tunnel — CI tooling, not an API client
+      library. Not published to Maven Central or the Gradle Plugin Portal under any American
+      Greetings coordinate; consumable only from source. version is null because the artifact
+      exists in no registry, not because the check was skipped.
+  - name: aginteractive/Gradle-Sauce-Connect-Plugin-Example
+    url: https://github.com/aginteractive/Gradle-Sauce-Connect-Plugin-Example
+    org: https://github.com/aginteractive
+    official: true
+    sdk: false
+    language: Groovy
+    version: null
+    published: null
+    last_pushed: '2017-01-23'
+    note: Example project for the plugin above. Not a package and not in any registry.
+notes: >-
+  github.com/aginteractive is the GitHub organisation of AG Interactive, American Greetings' digital
+  business unit; its "blog" field points at americangreetings.com, which is how ownership was
+  established. It holds two public repositories, both Groovy CI plugins, the newer of which was last
+  pushed in June 2021. Nothing in it wraps an American Greetings API.
+maintainers:
+  - FN: Kin Lane
+    email: kin@apievangelist.com
