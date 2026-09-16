@@ -36,6 +36,17 @@ tags:
   - Stationery
   - Party Supplies
   - Digital Greetings
+  - content-api
+  - WordPress REST API
+tags_raw:
+  - Greeting Cards
+  - Gift Wrap
+  - Celebration
+  - Consumer Products
+  - Retail
+  - Stationery
+  - Party Supplies
+  - Digital Greetings
   - Content API
   - WordPress REST API
 description: >-
@@ -53,49 +64,46 @@ created: '2026-04-19'
 modified: '2026-09-02'
 specificationVersion: '0.23'
 apis:
-  - aid: american-greetings:american-greetings-corporate-wordpress-rest-api
-    name: American Greetings Corporate WordPress REST API
-    tags:
-      - Content API
-      - WordPress REST API
-      - Brands
-      - Products
-      - Press Releases
-    image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
-    baseURL: https://corporate.americangreetings.com/wp-json
-    humanURL: https://corporate.americangreetings.com/
-    properties:
-      - url: openapi/american-greetings-corporate-wordpress-rest-openapi.yml
-        type: OpenAPI
-      - url: overlays/american-greetings-corporate-wordpress-rest-overlay.yaml
-        type: Overlay
-    description: >-
-      The WordPress REST API served by American Greetings from its corporate site. It advertises a
-      self-describing route index at /wp-json/ carrying 586 routes across 23 namespaces, of which
-      wp/v2 is the public content namespace. Two of its entities are American Greetings' own
-      custom post types — /wp/v2/products, the corporate product-line catalogue, and /wp/v2/brands,
-      the consumer brand portfolio — alongside press releases, corporate pages, a 630-item media
-      library, categories, tags and authors. All GET collections are readable without credentials;
-      every write requires WordPress application-password credentials that the company does not
-      issue publicly. American Greetings publishes no OpenAPI of its own; the description in this
-      repository was derived from the provider's route index and per-resource OPTIONS schemas.
-  - aid: american-greetings:american-greetings-api
-    name: American Greetings API
-    tags:
-      - Greeting Cards
-      - Gift Wrap
-      - Celebration
-    image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
-    baseURL: https://api.americangreetings.com
-    description: >-
-      An api. host that resolves through Akamai but returns an identical "Access Denied" 403 HTML
-      body to every non-browser client on every path, including the site root. No documentation,
-      no contract and no developer portal was found for it; nothing about what it serves can be
-      determined programmatically. Retained as an observed host, not as a documented API. The
-      humanURL and Documentation pointer previously carried here both referenced
-      developer.americangreetings.com, which does not resolve (NXDOMAIN, verified 2026-09-02), and
-      were removed.
+- aid: american-greetings:american-greetings-api
+  name: American Greetings API
+  tags:
+  - Greeting Cards
+  - Gift Wrap
+  - Celebration
+  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+  baseURL: https://api.americangreetings.com
+  description: >-
+    An api. host that resolves through Akamai but returns an identical "Access Denied" 403 HTML body to
+    every non-browser client on every path, including the site root. No documentation, no contract and
+    no developer portal was found for it; nothing about what it serves can be determined programmatically.
+    Retained as an observed host, not as a documented API. The humanURL and Documentation pointer previously
+    carried here both referenced developer.americangreetings.com, which does not resolve (NXDOMAIN, verified
+    2026-09-02), and were removed.
+- aid: american-greetings:american-greetings-oembed-1-0-api
+  name: American Greetings Oembed/1.0 API
+  description: oEmbed discovery and proxy endpoints.
+  humanURL: https://corporate.americangreetings.com/
+  baseURL: https://corporate.americangreetings.com/wp-json
+  tags:
+  - oembed/1.0
+  properties:
+  - type: OpenAPI
+    url: openapi/american-greetings-oembed-1-0-api-openapi.yml
+- aid: american-greetings:american-greetings-wp-v2-api
+  name: American Greetings Wp/v2 API
+  description: >-
+    WordPress core content namespace, including the American Greetings products and brands custom post
+    types.
+  humanURL: https://corporate.americangreetings.com/
+  baseURL: https://corporate.americangreetings.com/wp-json
+  tags:
+  - wp/v2
+  properties:
+  - type: OpenAPI
+    url: openapi/american-greetings-wp-v2-api-openapi.yml
 common:
+  - type: Overlay
+    url: overlays/american-greetings-corporate-wordpress-rest-overlay.yaml
   - type: Authentication
     url: authentication/american-greetings-authentication.yml
   - type: Conventions
