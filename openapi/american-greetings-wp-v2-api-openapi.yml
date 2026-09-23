@@ -1,211 +1,19 @@
-# generated: '2026-09-02'
-# method: derived
-# source: https://corporate.americangreetings.com/wp-json/ (provider route index) + per-resource OPTIONS schemas
-openapi: 3.1.0
+openapi: 3.2.0
 info:
-  title: American Greetings Corporate WordPress REST API
+  title: American Greetings Corporate WordPress REST Wp/v2 API
   version: '2026-09-02'
   description: Read-mostly content API served by American Greetings from its corporate site at corporate.americangreetings.com.
-    This is the WordPress REST API (namespace wp/v2 plus oEmbed 1.0) exposed by the WordPress VIP platform the company runs
-    its corporate site on. Alongside the standard WordPress content entities (posts, pages, media, categories, tags, users,
-    comments) it exposes two American Greetings-specific custom post types, /products and /brands, which carry the company's
-    own product and brand catalogue. GET collections are readable anonymously; all write operations require WordPress application-password
-    credentials. This document was DERIVED mechanically from the provider's own machine-readable route index at https://corporate.americangreetings.com/wp-json/
-    and per-resource OPTIONS schemas — American Greetings does not publish an OpenAPI description of its own.
   contact:
     name: American Greetings
     url: https://corporate.americangreetings.com/about-us/contact-us/
 servers:
 - url: https://corporate.americangreetings.com/wp-json
   description: American Greetings corporate WordPress REST API
+security: []
 tags:
 - name: wp/v2
   description: WordPress core content namespace, including the American Greetings products and brands custom post types.
-- name: oembed/1.0
-  description: oEmbed discovery and proxy endpoints.
 paths:
-  /oembed/1.0:
-    get:
-      operationId: get_oembed_1_0
-      summary: GET /oembed/1.0
-      tags:
-      - oembed/1.0
-      parameters:
-      - name: namespace
-        in: query
-        required: false
-        description: ''
-        schema:
-          default: oembed/1.0
-      - name: context
-        in: query
-        required: false
-        description: ''
-        schema:
-          default: view
-      responses:
-        '200':
-          description: Success
-          content:
-            application/json:
-              schema:
-                type: object
-        '400':
-          description: Invalid parameter
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/RestError'
-        '401':
-          description: Authentication required for this operation
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/RestError'
-        '403':
-          description: Forbidden
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/RestError'
-        '404':
-          description: No route or resource found
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/RestError'
-  /oembed/1.0/embed:
-    get:
-      operationId: get_oembed_1_0_embed
-      summary: GET /oembed/1.0/embed
-      tags:
-      - oembed/1.0
-      parameters:
-      - name: url
-        in: query
-        required: true
-        description: The URL of the resource for which to fetch oEmbed data.
-        schema:
-          type: string
-          format: uri
-      - name: format
-        in: query
-        required: false
-        description: ''
-        schema:
-          default: json
-      - name: maxwidth
-        in: query
-        required: false
-        description: ''
-        schema:
-          default: 600
-      responses:
-        '200':
-          description: Success
-          content:
-            application/json:
-              schema:
-                type: object
-        '400':
-          description: Invalid parameter
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/RestError'
-        '401':
-          description: Authentication required for this operation
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/RestError'
-        '403':
-          description: Forbidden
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/RestError'
-        '404':
-          description: No route or resource found
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/RestError'
-  /oembed/1.0/proxy:
-    get:
-      operationId: get_oembed_1_0_proxy
-      summary: GET /oembed/1.0/proxy
-      tags:
-      - oembed/1.0
-      parameters:
-      - name: url
-        in: query
-        required: true
-        description: The URL of the resource for which to fetch oEmbed data.
-        schema:
-          type: string
-          format: uri
-      - name: format
-        in: query
-        required: false
-        description: The oEmbed format to use.
-        schema:
-          type: string
-          enum:
-          - json
-          - xml
-          default: json
-      - name: maxwidth
-        in: query
-        required: false
-        description: The maximum width of the embed frame in pixels.
-        schema:
-          type: integer
-          default: 600
-      - name: maxheight
-        in: query
-        required: false
-        description: The maximum height of the embed frame in pixels.
-        schema:
-          type: integer
-      - name: discover
-        in: query
-        required: false
-        description: Whether to perform an oEmbed discovery request for unsanctioned providers.
-        schema:
-          type: boolean
-          default: true
-      responses:
-        '200':
-          description: Success
-          content:
-            application/json:
-              schema:
-                type: object
-        '400':
-          description: Invalid parameter
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/RestError'
-        '401':
-          description: Authentication required for this operation
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/RestError'
-        '403':
-          description: Forbidden
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/RestError'
-        '404':
-          description: No route or resource found
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/RestError'
   /wp/v2:
     get:
       operationId: get_wp_v2
@@ -8931,7 +8739,7 @@ paths:
         type: string
     get:
       operationId: get_wp_v2_icons_name_a_z0_9_a_z0_9_a_z0_9
-      summary: GET /wp/v2/icons/{name}?/[a-z0-9](?:[a-z0-9_-]*[a-z0-9])?)
+      summary: GET /wp/v2/icons/{name}?/a-z0-9?)
       tags:
       - wp/v2
       parameters:
@@ -9183,8 +8991,7 @@ paths:
       - name: has_responses
         in: query
         required: false
-        description: Filter forms by whether they have responses. "true" returns only forms with responses, "false" returns
-          only forms without.
+        description: Filter forms by whether they have responses. "true" returns only forms with responses, "false" returns only forms without.
         schema:
           type: string
           enum:
@@ -14794,8 +14601,7 @@ paths:
                           - height
                           properties:
                             left:
-                              description: Horizontal position from the left to begin the crop as a percentage of the image
-                                width.
+                              description: Horizontal position from the left to begin the crop as a percentage of the image width.
                               type: number
                             top:
                               description: Vertical position from the top to begin the crop as a percentage of the image height.
@@ -14816,26 +14622,22 @@ paths:
                   type: number
                   minimum: 0
                   maximum: 100
-                  description: 'As a percentage of the image, the x position to start the crop from. DEPRECATED: Use `modifiers`
-                    instead.'
+                  description: 'As a percentage of the image, the x position to start the crop from. DEPRECATED: Use `modifiers` instead.'
                 y:
                   type: number
                   minimum: 0
                   maximum: 100
-                  description: 'As a percentage of the image, the y position to start the crop from. DEPRECATED: Use `modifiers`
-                    instead.'
+                  description: 'As a percentage of the image, the y position to start the crop from. DEPRECATED: Use `modifiers` instead.'
                 width:
                   type: number
                   minimum: 0
                   maximum: 100
-                  description: 'As a percentage of the image, the width to crop the image to. DEPRECATED: Use `modifiers`
-                    instead.'
+                  description: 'As a percentage of the image, the width to crop the image to. DEPRECATED: Use `modifiers` instead.'
                 height:
                   type: number
                   minimum: 0
                   maximum: 100
-                  description: 'As a percentage of the image, the height to crop the image to. DEPRECATED: Use `modifiers`
-                    instead.'
+                  description: 'As a percentage of the image, the height to crop the image to. DEPRECATED: Use `modifiers` instead.'
                 caption:
                   type: object
                   properties:
@@ -14953,8 +14755,7 @@ paths:
                     type: object
                     properties:
                       image_size:
-                        description: Size name, or an array of size names when a single file is registered under multiple
-                          sizes with matching dimensions.
+                        description: Size name, or an array of size names when a single file is registered under multiple sizes with matching dimensions.
                         type:
                         - string
                         - array
@@ -15100,8 +14901,7 @@ paths:
                   items:
                     type: string
                     minLength: 1
-                  description: Image size. Can be a single size name or an array of size names to register the same file under
-                    multiple sizes.
+                  description: Image size. Can be a single size name or an array of size names to register the same file under multiple sizes.
                 convert_format:
                   type: boolean
                   default: true
@@ -15499,8 +15299,7 @@ paths:
                   type: integer
                   default: 0
                   minimum: 0
-                  description: The database ID of the original object this menu item represents, for example the ID for posts
-                    or the term_id for categories.
+                  description: The database ID of the original object this menu item represents, for example the ID for posts or the term_id for categories.
                 target:
                   type: string
                   enum:
@@ -15685,8 +15484,7 @@ paths:
                 object_id:
                   type: integer
                   minimum: 0
-                  description: The database ID of the original object this menu item represents, for example the ID for posts
-                    or the term_id for categories.
+                  description: The database ID of the original object this menu item represents, for example the ID for posts or the term_id for categories.
                 target:
                   type: string
                   enum:
@@ -15816,8 +15614,7 @@ paths:
                 object_id:
                   type: integer
                   minimum: 0
-                  description: The database ID of the original object this menu item represents, for example the ID for posts
-                    or the term_id for categories.
+                  description: The database ID of the original object this menu item represents, for example the ID for posts or the term_id for categories.
                 target:
                   type: string
                   enum:
@@ -15947,8 +15744,7 @@ paths:
                 object_id:
                   type: integer
                   minimum: 0
-                  description: The database ID of the original object this menu item represents, for example the ID for posts
-                    or the term_id for categories.
+                  description: The database ID of the original object this menu item represents, for example the ID for posts or the term_id for categories.
                 target:
                   type: string
                   enum:
@@ -16185,8 +15981,7 @@ paths:
                 object_id:
                   type: integer
                   minimum: 0
-                  description: The database ID of the original object this menu item represents, for example the ID for posts
-                    or the term_id for categories.
+                  description: The database ID of the original object this menu item represents, for example the ID for posts or the term_id for categories.
                 target:
                   type: string
                   enum:
@@ -26732,8 +26527,7 @@ paths:
       - name: template_prefix
         in: query
         required: false
-        description: The template prefix for the created template. This is used to extract the main template type, e.g. in
-          `taxonomy-books` extracts the `taxonomy`
+        description: The template prefix for the created template. This is used to extract the main template type, e.g. in `taxonomy-books` extracts the `taxonomy`
         schema:
           type: string
       responses:
@@ -27860,8 +27654,7 @@ paths:
       - name: template_prefix
         in: query
         required: false
-        description: The template prefix for the created template. This is used to extract the main template type, e.g. in
-          `taxonomy-books` extracts the `taxonomy`
+        description: The template prefix for the created template. This is used to extract the main template type, e.g. in `taxonomy-books` extracts the `taxonomy`
         schema:
           type: string
       responses:
@@ -28201,8 +27994,7 @@ paths:
       - name: capabilities
         in: query
         required: false
-        description: Limit result set to users matching at least one specific capability provided. Accepts csv list or single
-          capability.
+        description: Limit result set to users matching at least one specific capability provided. Accepts csv list or single capability.
         schema:
           type: array
           items:
@@ -28923,8 +28715,7 @@ paths:
                   - type: string
                     enum:
                     - ''
-                  description: A UUID provided by the application to uniquely identify it. It is recommended to use an UUID
-                    v5 with the URL or DNS namespace.
+                  description: A UUID provided by the application to uniquely identify it. It is recommended to use an UUID v5 with the URL or DNS namespace.
                 name:
                   type: string
                   pattern: .*\S.*
@@ -29082,8 +28873,7 @@ paths:
                   - type: string
                     enum:
                     - ''
-                  description: A UUID provided by the application to uniquely identify it. It is recommended to use an UUID
-                    v5 with the URL or DNS namespace.
+                  description: A UUID provided by the application to uniquely identify it. It is recommended to use an UUID v5 with the URL or DNS namespace.
                 name:
                   type: string
                   pattern: .*\S.*
@@ -29141,8 +28931,7 @@ paths:
                   - type: string
                     enum:
                     - ''
-                  description: A UUID provided by the application to uniquely identify it. It is recommended to use an UUID
-                    v5 with the URL or DNS namespace.
+                  description: A UUID provided by the application to uniquely identify it. It is recommended to use an UUID v5 with the URL or DNS namespace.
                 name:
                   type: string
                   pattern: .*\S.*
@@ -29200,8 +28989,7 @@ paths:
                   - type: string
                     enum:
                     - ''
-                  description: A UUID provided by the application to uniquely identify it. It is recommended to use an UUID
-                    v5 with the URL or DNS namespace.
+                  description: A UUID provided by the application to uniquely identify it. It is recommended to use an UUID v5 with the URL or DNS namespace.
                 name:
                   type: string
                   pattern: .*\S.*
@@ -30131,8 +29919,7 @@ paths:
                   description: Instance settings of the widget, if supported.
                 form_data:
                   type: string
-                  description: URL-encoded form data from the widget admin form. Used to update a widget that does not support
-                    instance. Write only.
+                  description: URL-encoded form data from the widget admin form. Used to update a widget that does not support instance. Write only.
               required:
               - sidebar
       responses:
@@ -30262,8 +30049,7 @@ paths:
                   description: Instance settings of the widget, if supported.
                 form_data:
                   type: string
-                  description: URL-encoded form data from the widget admin form. Used to update a widget that does not support
-                    instance. Write only.
+                  description: URL-encoded form data from the widget admin form. Used to update a widget that does not support instance. Write only.
       responses:
         '200':
           description: Success
@@ -30336,8 +30122,7 @@ paths:
                   description: Instance settings of the widget, if supported.
                 form_data:
                   type: string
-                  description: URL-encoded form data from the widget admin form. Used to update a widget that does not support
-                    instance. Write only.
+                  description: URL-encoded form data from the widget admin form. Used to update a widget that does not support instance. Write only.
       responses:
         '200':
           description: Success
@@ -30410,8 +30195,7 @@ paths:
                   description: Instance settings of the widget, if supported.
                 form_data:
                   type: string
-                  description: URL-encoded form data from the widget admin form. Used to update a widget that does not support
-                    instance. Write only.
+                  description: URL-encoded form data from the widget admin form. Used to update a widget that does not support instance. Write only.
       responses:
         '200':
           description: Success
@@ -30971,6 +30755,282 @@ paths:
       - applicationPassword: []
 components:
   schemas:
+    Brand:
+      $schema: http://json-schema.org/draft-04/schema#
+      title: brand
+      type: object
+      properties:
+        date:
+          description: The date the post was published, in the site's timezone.
+          type:
+          - string
+          - 'null'
+          format: date-time
+          context:
+          - view
+          - edit
+          - embed
+        date_gmt:
+          description: The date the post was published, as GMT.
+          type:
+          - string
+          - 'null'
+          format: date-time
+          context:
+          - view
+          - edit
+        guid:
+          description: The globally unique identifier for the post.
+          type: object
+          context:
+          - view
+          - edit
+          readonly: true
+          properties:
+            raw:
+              description: GUID for the post, as it exists in the database.
+              type: string
+              context:
+              - edit
+              readonly: true
+            rendered:
+              description: GUID for the post, transformed for display.
+              type: string
+              context:
+              - view
+              - edit
+              readonly: true
+        id:
+          description: Unique identifier for the post.
+          type: integer
+          context:
+          - view
+          - edit
+          - embed
+          readonly: true
+        link:
+          description: URL to the post.
+          type: string
+          format: uri
+          context:
+          - view
+          - edit
+          - embed
+          readonly: true
+        modified:
+          description: The date the post was last modified, in the site's timezone.
+          type: string
+          format: date-time
+          context:
+          - view
+          - edit
+          readonly: true
+        modified_gmt:
+          description: The date the post was last modified, as GMT.
+          type: string
+          format: date-time
+          context:
+          - view
+          - edit
+          readonly: true
+        slug:
+          description: An alphanumeric identifier for the post unique to its type.
+          type: string
+          context:
+          - view
+          - edit
+          - embed
+        status:
+          description: A named status for the post.
+          type: string
+          enum:
+          - publish
+          - future
+          - draft
+          - pending
+          - private
+          - spam
+          context:
+          - view
+          - edit
+        type:
+          description: Type of post.
+          type: string
+          context:
+          - view
+          - edit
+          - embed
+          readonly: true
+        password:
+          description: A password to protect access to the content and excerpt.
+          type: string
+          context:
+          - edit
+        permalink_template:
+          description: Permalink template for the post.
+          type: string
+          context:
+          - edit
+          readonly: true
+        generated_slug:
+          description: Slug automatically generated from the post title.
+          type: string
+          context:
+          - edit
+          readonly: true
+        class_list:
+          description: An array of the class names for the post container element.
+          type: array
+          context:
+          - view
+          - edit
+          readonly: true
+          items:
+            type: string
+        parent:
+          description: The ID for the parent of the post.
+          type: integer
+          context:
+          - view
+          - edit
+        title:
+          description: The title for the post.
+          type: object
+          context:
+          - view
+          - edit
+          - embed
+          properties:
+            raw:
+              description: Title for the post, as it exists in the database.
+              type: string
+              context:
+              - edit
+            rendered:
+              description: HTML title for the post, transformed for display.
+              type: string
+              context:
+              - view
+              - edit
+              - embed
+              readonly: true
+        content:
+          description: The content for the post.
+          type: object
+          context:
+          - view
+          - edit
+          properties:
+            raw:
+              description: Content for the post, as it exists in the database.
+              type: string
+              context:
+              - edit
+            rendered:
+              description: HTML content for the post, transformed for display.
+              type: string
+              context:
+              - view
+              - edit
+              readonly: true
+            block_version:
+              description: Version of the content block format used by the post.
+              type: integer
+              context:
+              - edit
+              readonly: true
+            protected:
+              description: Whether the content is protected with a password.
+              type: boolean
+              context:
+              - view
+              - edit
+              - embed
+              readonly: true
+        excerpt:
+          description: The excerpt for the post.
+          type: object
+          context:
+          - view
+          - edit
+          - embed
+          properties:
+            raw:
+              description: Excerpt for the post, as it exists in the database.
+              type: string
+              context:
+              - edit
+            rendered:
+              description: HTML excerpt for the post, transformed for display.
+              type: string
+              context:
+              - view
+              - edit
+              - embed
+              readonly: true
+            protected:
+              description: Whether the excerpt is protected with a password.
+              type: boolean
+              context:
+              - view
+              - edit
+              - embed
+              readonly: true
+        featured_media:
+          description: The ID of the featured media for the post.
+          type: integer
+          context:
+          - view
+          - edit
+          - embed
+        menu_order:
+          description: The order of the post in relation to other posts.
+          type: integer
+          context:
+          - view
+          - edit
+        meta:
+          description: Meta fields.
+          type: object
+          context:
+          - view
+          - edit
+          properties:
+            footnotes:
+              type: string
+              title: ''
+              description: ''
+              default: ''
+        template:
+          description: The theme file to use to display the post.
+          type: string
+          context:
+          - view
+          - edit
+        jetpack_sharing_enabled:
+          description: Are sharing buttons enabled?
+          type: boolean
+      links:
+      - rel: https://api.w.org/action-publish
+        title: The current user can publish this post.
+        href: https://corporate.americangreetings.com/wp-json/wp/v2/brands/{id}
+        targetSchema:
+          type: object
+          properties:
+            status:
+              type: string
+              enum:
+              - publish
+              - future
+      - rel: https://api.w.org/action-unfiltered-html
+        title: The current user can post unfiltered HTML markup and JavaScript.
+        href: https://corporate.americangreetings.com/wp-json/wp/v2/brands/{id}
+        targetSchema:
+          type: object
+          properties:
+            content:
+              raw:
+                type: string
     Post:
       $schema: http://json-schema.org/draft-04/schema#
       title: post
@@ -31410,6 +31470,544 @@ components:
               type: array
               items:
                 type: integer
+    Product:
+      $schema: http://json-schema.org/draft-04/schema#
+      title: product
+      type: object
+      properties:
+        date:
+          description: The date the post was published, in the site's timezone.
+          type:
+          - string
+          - 'null'
+          format: date-time
+          context:
+          - view
+          - edit
+          - embed
+        date_gmt:
+          description: The date the post was published, as GMT.
+          type:
+          - string
+          - 'null'
+          format: date-time
+          context:
+          - view
+          - edit
+        guid:
+          description: The globally unique identifier for the post.
+          type: object
+          context:
+          - view
+          - edit
+          readonly: true
+          properties:
+            raw:
+              description: GUID for the post, as it exists in the database.
+              type: string
+              context:
+              - edit
+              readonly: true
+            rendered:
+              description: GUID for the post, transformed for display.
+              type: string
+              context:
+              - view
+              - edit
+              readonly: true
+        id:
+          description: Unique identifier for the post.
+          type: integer
+          context:
+          - view
+          - edit
+          - embed
+          readonly: true
+        link:
+          description: URL to the post.
+          type: string
+          format: uri
+          context:
+          - view
+          - edit
+          - embed
+          readonly: true
+        modified:
+          description: The date the post was last modified, in the site's timezone.
+          type: string
+          format: date-time
+          context:
+          - view
+          - edit
+          readonly: true
+        modified_gmt:
+          description: The date the post was last modified, as GMT.
+          type: string
+          format: date-time
+          context:
+          - view
+          - edit
+          readonly: true
+        slug:
+          description: An alphanumeric identifier for the post unique to its type.
+          type: string
+          context:
+          - view
+          - edit
+          - embed
+        status:
+          description: A named status for the post.
+          type: string
+          enum:
+          - publish
+          - future
+          - draft
+          - pending
+          - private
+          - spam
+          context:
+          - view
+          - edit
+        type:
+          description: Type of post.
+          type: string
+          context:
+          - view
+          - edit
+          - embed
+          readonly: true
+        password:
+          description: A password to protect access to the content and excerpt.
+          type: string
+          context:
+          - edit
+        permalink_template:
+          description: Permalink template for the post.
+          type: string
+          context:
+          - edit
+          readonly: true
+        generated_slug:
+          description: Slug automatically generated from the post title.
+          type: string
+          context:
+          - edit
+          readonly: true
+        class_list:
+          description: An array of the class names for the post container element.
+          type: array
+          context:
+          - view
+          - edit
+          readonly: true
+          items:
+            type: string
+        parent:
+          description: The ID for the parent of the post.
+          type: integer
+          context:
+          - view
+          - edit
+        title:
+          description: The title for the post.
+          type: object
+          context:
+          - view
+          - edit
+          - embed
+          properties:
+            raw:
+              description: Title for the post, as it exists in the database.
+              type: string
+              context:
+              - edit
+            rendered:
+              description: HTML title for the post, transformed for display.
+              type: string
+              context:
+              - view
+              - edit
+              - embed
+              readonly: true
+        content:
+          description: The content for the post.
+          type: object
+          context:
+          - view
+          - edit
+          properties:
+            raw:
+              description: Content for the post, as it exists in the database.
+              type: string
+              context:
+              - edit
+            rendered:
+              description: HTML content for the post, transformed for display.
+              type: string
+              context:
+              - view
+              - edit
+              readonly: true
+            block_version:
+              description: Version of the content block format used by the post.
+              type: integer
+              context:
+              - edit
+              readonly: true
+            protected:
+              description: Whether the content is protected with a password.
+              type: boolean
+              context:
+              - view
+              - edit
+              - embed
+              readonly: true
+        excerpt:
+          description: The excerpt for the post.
+          type: object
+          context:
+          - view
+          - edit
+          - embed
+          properties:
+            raw:
+              description: Excerpt for the post, as it exists in the database.
+              type: string
+              context:
+              - edit
+            rendered:
+              description: HTML excerpt for the post, transformed for display.
+              type: string
+              context:
+              - view
+              - edit
+              - embed
+              readonly: true
+            protected:
+              description: Whether the excerpt is protected with a password.
+              type: boolean
+              context:
+              - view
+              - edit
+              - embed
+              readonly: true
+        featured_media:
+          description: The ID of the featured media for the post.
+          type: integer
+          context:
+          - view
+          - edit
+          - embed
+        menu_order:
+          description: The order of the post in relation to other posts.
+          type: integer
+          context:
+          - view
+          - edit
+        meta:
+          description: Meta fields.
+          type: object
+          context:
+          - view
+          - edit
+          properties:
+            footnotes:
+              type: string
+              title: ''
+              description: ''
+              default: ''
+        template:
+          description: The theme file to use to display the post.
+          type: string
+          context:
+          - view
+          - edit
+        jetpack_sharing_enabled:
+          description: Are sharing buttons enabled?
+          type: boolean
+      links:
+      - rel: https://api.w.org/action-publish
+        title: The current user can publish this post.
+        href: https://corporate.americangreetings.com/wp-json/wp/v2/products/{id}
+        targetSchema:
+          type: object
+          properties:
+            status:
+              type: string
+              enum:
+              - publish
+              - future
+      - rel: https://api.w.org/action-unfiltered-html
+        title: The current user can post unfiltered HTML markup and JavaScript.
+        href: https://corporate.americangreetings.com/wp-json/wp/v2/products/{id}
+        targetSchema:
+          type: object
+          properties:
+            content:
+              raw:
+                type: string
+    RestError:
+      type: object
+      description: WordPress REST API error envelope, observed on this host.
+      properties:
+        code:
+          type: string
+          description: Machine-readable error code, e.g. rest_no_route.
+        message:
+          type: string
+          description: Human-readable error message.
+        data:
+          type: object
+          properties:
+            status:
+              type: integer
+      required:
+      - code
+      - message
+    Tag:
+      $schema: http://json-schema.org/draft-04/schema#
+      title: tag
+      type: object
+      properties:
+        id:
+          description: Unique identifier for the term.
+          type: integer
+          context:
+          - view
+          - embed
+          - edit
+          readonly: true
+        count:
+          description: Number of published posts for the term.
+          type: integer
+          context:
+          - view
+          - edit
+          readonly: true
+        description:
+          description: HTML description of the term.
+          type: string
+          context:
+          - view
+          - edit
+        link:
+          description: URL of the term.
+          type: string
+          format: uri
+          context:
+          - view
+          - embed
+          - edit
+          readonly: true
+        name:
+          description: HTML title for the term.
+          type: string
+          context:
+          - view
+          - embed
+          - edit
+          required: true
+        slug:
+          description: An alphanumeric identifier for the term unique to its type.
+          type: string
+          context:
+          - view
+          - embed
+          - edit
+        taxonomy:
+          description: Type attribution for the term.
+          type: string
+          enum:
+          - post_tag
+          context:
+          - view
+          - embed
+          - edit
+          readonly: true
+        meta:
+          description: Meta fields.
+          type: object
+          context:
+          - view
+          - edit
+          properties: []
+    User:
+      $schema: http://json-schema.org/draft-04/schema#
+      title: user
+      type: object
+      properties:
+        id:
+          description: Unique identifier for the user.
+          type: integer
+          context:
+          - embed
+          - view
+          - edit
+          readonly: true
+        username:
+          description: Login name for the user.
+          type: string
+          context:
+          - edit
+          required: true
+        name:
+          description: Display name for the user.
+          type: string
+          context:
+          - embed
+          - view
+          - edit
+        first_name:
+          description: First name for the user.
+          type: string
+          context:
+          - edit
+        last_name:
+          description: Last name for the user.
+          type: string
+          context:
+          - edit
+        email:
+          description: The email address for the user.
+          type: string
+          format: email
+          context:
+          - edit
+          required: true
+        url:
+          description: URL of the user.
+          type: string
+          format: uri
+          context:
+          - embed
+          - view
+          - edit
+        description:
+          description: Description of the user.
+          type: string
+          context:
+          - embed
+          - view
+          - edit
+        link:
+          description: Author URL of the user.
+          type: string
+          format: uri
+          context:
+          - embed
+          - view
+          - edit
+          readonly: true
+        locale:
+          description: Locale for the user.
+          type: string
+          enum:
+          - ''
+          - en_US
+          context:
+          - edit
+        nickname:
+          description: The nickname for the user.
+          type: string
+          context:
+          - edit
+        slug:
+          description: An alphanumeric identifier for the user.
+          type: string
+          context:
+          - embed
+          - view
+          - edit
+        registered_date:
+          description: Registration date for the user.
+          type: string
+          format: date-time
+          context:
+          - edit
+          readonly: true
+        roles:
+          description: Roles assigned to the user.
+          type: array
+          items:
+            type: string
+          context:
+          - edit
+        password:
+          description: Password for the user (never included).
+          type: string
+          context: []
+          required: true
+        capabilities:
+          description: All capabilities assigned to the user.
+          type: object
+          context:
+          - edit
+          readonly: true
+        extra_capabilities:
+          description: Any extra capabilities assigned to the user.
+          type: object
+          context:
+          - edit
+          readonly: true
+        avatar_urls:
+          description: Avatar URLs for the user.
+          type: object
+          context:
+          - embed
+          - view
+          - edit
+          readonly: true
+          properties:
+            '24':
+              description: Avatar URL with image size of 24 pixels.
+              type: string
+              format: uri
+              context:
+              - embed
+              - view
+              - edit
+            '48':
+              description: Avatar URL with image size of 48 pixels.
+              type: string
+              format: uri
+              context:
+              - embed
+              - view
+              - edit
+            '96':
+              description: Avatar URL with image size of 96 pixels.
+              type: string
+              format: uri
+              context:
+              - embed
+              - view
+              - edit
+        meta:
+          description: Meta fields.
+          type: object
+          context:
+          - view
+          - edit
+          properties:
+            persisted_preferences:
+              type: object
+              title: ''
+              description: ''
+              default: []
+              context:
+              - edit
+              properties:
+                _modified:
+                  description: The date and time the preferences were updated.
+                  type: string
+                  format: date-time
+                  readonly: false
+              additionalProperties: true
+            jetpack_donation_warning_dismissed:
+              type: boolean
+              title: ''
+              description: ''
+              default: false
     Page:
       $schema: http://json-schema.org/draft-04/schema#
       title: page
@@ -31719,6 +32317,181 @@ components:
           properties:
             author:
               type: integer
+    Comment:
+      $schema: http://json-schema.org/draft-04/schema#
+      title: comment
+      type: object
+      properties:
+        id:
+          description: Unique identifier for the comment.
+          type: integer
+          context:
+          - view
+          - edit
+          - embed
+          readonly: true
+        author:
+          description: The ID of the user object, if author was a user.
+          type: integer
+          context:
+          - view
+          - edit
+          - embed
+        author_email:
+          description: Email address for the comment author.
+          type: string
+          format: email
+          context:
+          - edit
+        author_ip:
+          description: IP address for the comment author.
+          type: string
+          format: ip
+          context:
+          - edit
+        author_name:
+          description: Display name for the comment author.
+          type: string
+          context:
+          - view
+          - edit
+          - embed
+        author_url:
+          description: URL for the comment author.
+          type: string
+          format: uri
+          context:
+          - view
+          - edit
+          - embed
+        author_user_agent:
+          description: User agent for the comment author.
+          type: string
+          context:
+          - edit
+        content:
+          description: The content for the comment.
+          type: object
+          context:
+          - view
+          - edit
+          - embed
+          properties:
+            raw:
+              description: Content for the comment, as it exists in the database.
+              type: string
+              context:
+              - edit
+            rendered:
+              description: HTML content for the comment, transformed for display.
+              type: string
+              context:
+              - view
+              - edit
+              - embed
+              readonly: true
+        date:
+          description: The date the comment was published, in the site's timezone.
+          type: string
+          format: date-time
+          context:
+          - view
+          - edit
+          - embed
+        date_gmt:
+          description: The date the comment was published, as GMT.
+          type: string
+          format: date-time
+          context:
+          - view
+          - edit
+        link:
+          description: URL to the comment.
+          type: string
+          format: uri
+          context:
+          - view
+          - edit
+          - embed
+          readonly: true
+        parent:
+          description: The ID for the parent of the comment.
+          type: integer
+          context:
+          - view
+          - edit
+          - embed
+          default: 0
+        post:
+          description: The ID of the associated post object.
+          type: integer
+          context:
+          - view
+          - edit
+          default: 0
+        status:
+          description: State of the comment.
+          type: string
+          context:
+          - view
+          - edit
+        type:
+          description: Type of the comment.
+          type: string
+          context:
+          - view
+          - edit
+          - embed
+          readonly: true
+          default: comment
+        author_avatar_urls:
+          description: Avatar URLs for the comment author.
+          type: object
+          context:
+          - view
+          - edit
+          - embed
+          readonly: true
+          properties:
+            '24':
+              description: Avatar URL with image size of 24 pixels.
+              type: string
+              format: uri
+              context:
+              - embed
+              - view
+              - edit
+            '48':
+              description: Avatar URL with image size of 48 pixels.
+              type: string
+              format: uri
+              context:
+              - embed
+              - view
+              - edit
+            '96':
+              description: Avatar URL with image size of 96 pixels.
+              type: string
+              format: uri
+              context:
+              - embed
+              - view
+              - edit
+        meta:
+          description: Meta fields.
+          type: object
+          context:
+          - view
+          - edit
+          properties:
+            _wp_note_status:
+              type: string
+              title: ''
+              description: Note resolution status
+              default: ''
+              enum:
+              - resolved
+              - reopen
     Attachment:
       $schema: http://json-schema.org/draft-04/schema#
       title: attachment
@@ -32053,9 +32826,7 @@ components:
           - edit
           readonly: true
         image_quality:
-          description: Encode quality (1-100) from the wp_editor_set_quality filter, resolved against the output MIME type.
-            The "default" value applies to the full-size image; "sizes" lists per-registered-size overrides where the filtered
-            value differs from "default".
+          description: Encode quality (1-100) from the wp_editor_set_quality filter, resolved against the output MIME type. The "default" value applies to the full-size image; "sizes" lists per-registered-size overrides where the filtered value differs from "default".
           type: object
           context:
           - edit
@@ -32069,8 +32840,7 @@ components:
               type: object
               properties: []
         image_output_format:
-          description: The output MIME type this image should be converted to, based on the image_editor_output_format filter.
-            Null if no conversion is needed.
+          description: The output MIME type this image should be converted to, based on the image_editor_output_format filter. Null if no conversion is needed.
           type:
           - string
           - 'null'
@@ -32174,998 +32944,8 @@ components:
           - view
           - edit
           properties: []
-    Tag:
-      $schema: http://json-schema.org/draft-04/schema#
-      title: tag
-      type: object
-      properties:
-        id:
-          description: Unique identifier for the term.
-          type: integer
-          context:
-          - view
-          - embed
-          - edit
-          readonly: true
-        count:
-          description: Number of published posts for the term.
-          type: integer
-          context:
-          - view
-          - edit
-          readonly: true
-        description:
-          description: HTML description of the term.
-          type: string
-          context:
-          - view
-          - edit
-        link:
-          description: URL of the term.
-          type: string
-          format: uri
-          context:
-          - view
-          - embed
-          - edit
-          readonly: true
-        name:
-          description: HTML title for the term.
-          type: string
-          context:
-          - view
-          - embed
-          - edit
-          required: true
-        slug:
-          description: An alphanumeric identifier for the term unique to its type.
-          type: string
-          context:
-          - view
-          - embed
-          - edit
-        taxonomy:
-          description: Type attribution for the term.
-          type: string
-          enum:
-          - post_tag
-          context:
-          - view
-          - embed
-          - edit
-          readonly: true
-        meta:
-          description: Meta fields.
-          type: object
-          context:
-          - view
-          - edit
-          properties: []
-    User:
-      $schema: http://json-schema.org/draft-04/schema#
-      title: user
-      type: object
-      properties:
-        id:
-          description: Unique identifier for the user.
-          type: integer
-          context:
-          - embed
-          - view
-          - edit
-          readonly: true
-        username:
-          description: Login name for the user.
-          type: string
-          context:
-          - edit
-          required: true
-        name:
-          description: Display name for the user.
-          type: string
-          context:
-          - embed
-          - view
-          - edit
-        first_name:
-          description: First name for the user.
-          type: string
-          context:
-          - edit
-        last_name:
-          description: Last name for the user.
-          type: string
-          context:
-          - edit
-        email:
-          description: The email address for the user.
-          type: string
-          format: email
-          context:
-          - edit
-          required: true
-        url:
-          description: URL of the user.
-          type: string
-          format: uri
-          context:
-          - embed
-          - view
-          - edit
-        description:
-          description: Description of the user.
-          type: string
-          context:
-          - embed
-          - view
-          - edit
-        link:
-          description: Author URL of the user.
-          type: string
-          format: uri
-          context:
-          - embed
-          - view
-          - edit
-          readonly: true
-        locale:
-          description: Locale for the user.
-          type: string
-          enum:
-          - ''
-          - en_US
-          context:
-          - edit
-        nickname:
-          description: The nickname for the user.
-          type: string
-          context:
-          - edit
-        slug:
-          description: An alphanumeric identifier for the user.
-          type: string
-          context:
-          - embed
-          - view
-          - edit
-        registered_date:
-          description: Registration date for the user.
-          type: string
-          format: date-time
-          context:
-          - edit
-          readonly: true
-        roles:
-          description: Roles assigned to the user.
-          type: array
-          items:
-            type: string
-          context:
-          - edit
-        password:
-          description: Password for the user (never included).
-          type: string
-          context: []
-          required: true
-        capabilities:
-          description: All capabilities assigned to the user.
-          type: object
-          context:
-          - edit
-          readonly: true
-        extra_capabilities:
-          description: Any extra capabilities assigned to the user.
-          type: object
-          context:
-          - edit
-          readonly: true
-        avatar_urls:
-          description: Avatar URLs for the user.
-          type: object
-          context:
-          - embed
-          - view
-          - edit
-          readonly: true
-          properties:
-            '24':
-              description: Avatar URL with image size of 24 pixels.
-              type: string
-              format: uri
-              context:
-              - embed
-              - view
-              - edit
-            '48':
-              description: Avatar URL with image size of 48 pixels.
-              type: string
-              format: uri
-              context:
-              - embed
-              - view
-              - edit
-            '96':
-              description: Avatar URL with image size of 96 pixels.
-              type: string
-              format: uri
-              context:
-              - embed
-              - view
-              - edit
-        meta:
-          description: Meta fields.
-          type: object
-          context:
-          - view
-          - edit
-          properties:
-            persisted_preferences:
-              type: object
-              title: ''
-              description: ''
-              default: []
-              context:
-              - edit
-              properties:
-                _modified:
-                  description: The date and time the preferences were updated.
-                  type: string
-                  format: date-time
-                  readonly: false
-              additionalProperties: true
-            jetpack_donation_warning_dismissed:
-              type: boolean
-              title: ''
-              description: ''
-              default: false
-    Comment:
-      $schema: http://json-schema.org/draft-04/schema#
-      title: comment
-      type: object
-      properties:
-        id:
-          description: Unique identifier for the comment.
-          type: integer
-          context:
-          - view
-          - edit
-          - embed
-          readonly: true
-        author:
-          description: The ID of the user object, if author was a user.
-          type: integer
-          context:
-          - view
-          - edit
-          - embed
-        author_email:
-          description: Email address for the comment author.
-          type: string
-          format: email
-          context:
-          - edit
-        author_ip:
-          description: IP address for the comment author.
-          type: string
-          format: ip
-          context:
-          - edit
-        author_name:
-          description: Display name for the comment author.
-          type: string
-          context:
-          - view
-          - edit
-          - embed
-        author_url:
-          description: URL for the comment author.
-          type: string
-          format: uri
-          context:
-          - view
-          - edit
-          - embed
-        author_user_agent:
-          description: User agent for the comment author.
-          type: string
-          context:
-          - edit
-        content:
-          description: The content for the comment.
-          type: object
-          context:
-          - view
-          - edit
-          - embed
-          properties:
-            raw:
-              description: Content for the comment, as it exists in the database.
-              type: string
-              context:
-              - edit
-            rendered:
-              description: HTML content for the comment, transformed for display.
-              type: string
-              context:
-              - view
-              - edit
-              - embed
-              readonly: true
-        date:
-          description: The date the comment was published, in the site's timezone.
-          type: string
-          format: date-time
-          context:
-          - view
-          - edit
-          - embed
-        date_gmt:
-          description: The date the comment was published, as GMT.
-          type: string
-          format: date-time
-          context:
-          - view
-          - edit
-        link:
-          description: URL to the comment.
-          type: string
-          format: uri
-          context:
-          - view
-          - edit
-          - embed
-          readonly: true
-        parent:
-          description: The ID for the parent of the comment.
-          type: integer
-          context:
-          - view
-          - edit
-          - embed
-          default: 0
-        post:
-          description: The ID of the associated post object.
-          type: integer
-          context:
-          - view
-          - edit
-          default: 0
-        status:
-          description: State of the comment.
-          type: string
-          context:
-          - view
-          - edit
-        type:
-          description: Type of the comment.
-          type: string
-          context:
-          - view
-          - edit
-          - embed
-          readonly: true
-          default: comment
-        author_avatar_urls:
-          description: Avatar URLs for the comment author.
-          type: object
-          context:
-          - view
-          - edit
-          - embed
-          readonly: true
-          properties:
-            '24':
-              description: Avatar URL with image size of 24 pixels.
-              type: string
-              format: uri
-              context:
-              - embed
-              - view
-              - edit
-            '48':
-              description: Avatar URL with image size of 48 pixels.
-              type: string
-              format: uri
-              context:
-              - embed
-              - view
-              - edit
-            '96':
-              description: Avatar URL with image size of 96 pixels.
-              type: string
-              format: uri
-              context:
-              - embed
-              - view
-              - edit
-        meta:
-          description: Meta fields.
-          type: object
-          context:
-          - view
-          - edit
-          properties:
-            _wp_note_status:
-              type: string
-              title: ''
-              description: Note resolution status
-              default: ''
-              enum:
-              - resolved
-              - reopen
-    Product:
-      $schema: http://json-schema.org/draft-04/schema#
-      title: product
-      type: object
-      properties:
-        date:
-          description: The date the post was published, in the site's timezone.
-          type:
-          - string
-          - 'null'
-          format: date-time
-          context:
-          - view
-          - edit
-          - embed
-        date_gmt:
-          description: The date the post was published, as GMT.
-          type:
-          - string
-          - 'null'
-          format: date-time
-          context:
-          - view
-          - edit
-        guid:
-          description: The globally unique identifier for the post.
-          type: object
-          context:
-          - view
-          - edit
-          readonly: true
-          properties:
-            raw:
-              description: GUID for the post, as it exists in the database.
-              type: string
-              context:
-              - edit
-              readonly: true
-            rendered:
-              description: GUID for the post, transformed for display.
-              type: string
-              context:
-              - view
-              - edit
-              readonly: true
-        id:
-          description: Unique identifier for the post.
-          type: integer
-          context:
-          - view
-          - edit
-          - embed
-          readonly: true
-        link:
-          description: URL to the post.
-          type: string
-          format: uri
-          context:
-          - view
-          - edit
-          - embed
-          readonly: true
-        modified:
-          description: The date the post was last modified, in the site's timezone.
-          type: string
-          format: date-time
-          context:
-          - view
-          - edit
-          readonly: true
-        modified_gmt:
-          description: The date the post was last modified, as GMT.
-          type: string
-          format: date-time
-          context:
-          - view
-          - edit
-          readonly: true
-        slug:
-          description: An alphanumeric identifier for the post unique to its type.
-          type: string
-          context:
-          - view
-          - edit
-          - embed
-        status:
-          description: A named status for the post.
-          type: string
-          enum:
-          - publish
-          - future
-          - draft
-          - pending
-          - private
-          - spam
-          context:
-          - view
-          - edit
-        type:
-          description: Type of post.
-          type: string
-          context:
-          - view
-          - edit
-          - embed
-          readonly: true
-        password:
-          description: A password to protect access to the content and excerpt.
-          type: string
-          context:
-          - edit
-        permalink_template:
-          description: Permalink template for the post.
-          type: string
-          context:
-          - edit
-          readonly: true
-        generated_slug:
-          description: Slug automatically generated from the post title.
-          type: string
-          context:
-          - edit
-          readonly: true
-        class_list:
-          description: An array of the class names for the post container element.
-          type: array
-          context:
-          - view
-          - edit
-          readonly: true
-          items:
-            type: string
-        parent:
-          description: The ID for the parent of the post.
-          type: integer
-          context:
-          - view
-          - edit
-        title:
-          description: The title for the post.
-          type: object
-          context:
-          - view
-          - edit
-          - embed
-          properties:
-            raw:
-              description: Title for the post, as it exists in the database.
-              type: string
-              context:
-              - edit
-            rendered:
-              description: HTML title for the post, transformed for display.
-              type: string
-              context:
-              - view
-              - edit
-              - embed
-              readonly: true
-        content:
-          description: The content for the post.
-          type: object
-          context:
-          - view
-          - edit
-          properties:
-            raw:
-              description: Content for the post, as it exists in the database.
-              type: string
-              context:
-              - edit
-            rendered:
-              description: HTML content for the post, transformed for display.
-              type: string
-              context:
-              - view
-              - edit
-              readonly: true
-            block_version:
-              description: Version of the content block format used by the post.
-              type: integer
-              context:
-              - edit
-              readonly: true
-            protected:
-              description: Whether the content is protected with a password.
-              type: boolean
-              context:
-              - view
-              - edit
-              - embed
-              readonly: true
-        excerpt:
-          description: The excerpt for the post.
-          type: object
-          context:
-          - view
-          - edit
-          - embed
-          properties:
-            raw:
-              description: Excerpt for the post, as it exists in the database.
-              type: string
-              context:
-              - edit
-            rendered:
-              description: HTML excerpt for the post, transformed for display.
-              type: string
-              context:
-              - view
-              - edit
-              - embed
-              readonly: true
-            protected:
-              description: Whether the excerpt is protected with a password.
-              type: boolean
-              context:
-              - view
-              - edit
-              - embed
-              readonly: true
-        featured_media:
-          description: The ID of the featured media for the post.
-          type: integer
-          context:
-          - view
-          - edit
-          - embed
-        menu_order:
-          description: The order of the post in relation to other posts.
-          type: integer
-          context:
-          - view
-          - edit
-        meta:
-          description: Meta fields.
-          type: object
-          context:
-          - view
-          - edit
-          properties:
-            footnotes:
-              type: string
-              title: ''
-              description: ''
-              default: ''
-        template:
-          description: The theme file to use to display the post.
-          type: string
-          context:
-          - view
-          - edit
-        jetpack_sharing_enabled:
-          description: Are sharing buttons enabled?
-          type: boolean
-      links:
-      - rel: https://api.w.org/action-publish
-        title: The current user can publish this post.
-        href: https://corporate.americangreetings.com/wp-json/wp/v2/products/{id}
-        targetSchema:
-          type: object
-          properties:
-            status:
-              type: string
-              enum:
-              - publish
-              - future
-      - rel: https://api.w.org/action-unfiltered-html
-        title: The current user can post unfiltered HTML markup and JavaScript.
-        href: https://corporate.americangreetings.com/wp-json/wp/v2/products/{id}
-        targetSchema:
-          type: object
-          properties:
-            content:
-              raw:
-                type: string
-    Brand:
-      $schema: http://json-schema.org/draft-04/schema#
-      title: brand
-      type: object
-      properties:
-        date:
-          description: The date the post was published, in the site's timezone.
-          type:
-          - string
-          - 'null'
-          format: date-time
-          context:
-          - view
-          - edit
-          - embed
-        date_gmt:
-          description: The date the post was published, as GMT.
-          type:
-          - string
-          - 'null'
-          format: date-time
-          context:
-          - view
-          - edit
-        guid:
-          description: The globally unique identifier for the post.
-          type: object
-          context:
-          - view
-          - edit
-          readonly: true
-          properties:
-            raw:
-              description: GUID for the post, as it exists in the database.
-              type: string
-              context:
-              - edit
-              readonly: true
-            rendered:
-              description: GUID for the post, transformed for display.
-              type: string
-              context:
-              - view
-              - edit
-              readonly: true
-        id:
-          description: Unique identifier for the post.
-          type: integer
-          context:
-          - view
-          - edit
-          - embed
-          readonly: true
-        link:
-          description: URL to the post.
-          type: string
-          format: uri
-          context:
-          - view
-          - edit
-          - embed
-          readonly: true
-        modified:
-          description: The date the post was last modified, in the site's timezone.
-          type: string
-          format: date-time
-          context:
-          - view
-          - edit
-          readonly: true
-        modified_gmt:
-          description: The date the post was last modified, as GMT.
-          type: string
-          format: date-time
-          context:
-          - view
-          - edit
-          readonly: true
-        slug:
-          description: An alphanumeric identifier for the post unique to its type.
-          type: string
-          context:
-          - view
-          - edit
-          - embed
-        status:
-          description: A named status for the post.
-          type: string
-          enum:
-          - publish
-          - future
-          - draft
-          - pending
-          - private
-          - spam
-          context:
-          - view
-          - edit
-        type:
-          description: Type of post.
-          type: string
-          context:
-          - view
-          - edit
-          - embed
-          readonly: true
-        password:
-          description: A password to protect access to the content and excerpt.
-          type: string
-          context:
-          - edit
-        permalink_template:
-          description: Permalink template for the post.
-          type: string
-          context:
-          - edit
-          readonly: true
-        generated_slug:
-          description: Slug automatically generated from the post title.
-          type: string
-          context:
-          - edit
-          readonly: true
-        class_list:
-          description: An array of the class names for the post container element.
-          type: array
-          context:
-          - view
-          - edit
-          readonly: true
-          items:
-            type: string
-        parent:
-          description: The ID for the parent of the post.
-          type: integer
-          context:
-          - view
-          - edit
-        title:
-          description: The title for the post.
-          type: object
-          context:
-          - view
-          - edit
-          - embed
-          properties:
-            raw:
-              description: Title for the post, as it exists in the database.
-              type: string
-              context:
-              - edit
-            rendered:
-              description: HTML title for the post, transformed for display.
-              type: string
-              context:
-              - view
-              - edit
-              - embed
-              readonly: true
-        content:
-          description: The content for the post.
-          type: object
-          context:
-          - view
-          - edit
-          properties:
-            raw:
-              description: Content for the post, as it exists in the database.
-              type: string
-              context:
-              - edit
-            rendered:
-              description: HTML content for the post, transformed for display.
-              type: string
-              context:
-              - view
-              - edit
-              readonly: true
-            block_version:
-              description: Version of the content block format used by the post.
-              type: integer
-              context:
-              - edit
-              readonly: true
-            protected:
-              description: Whether the content is protected with a password.
-              type: boolean
-              context:
-              - view
-              - edit
-              - embed
-              readonly: true
-        excerpt:
-          description: The excerpt for the post.
-          type: object
-          context:
-          - view
-          - edit
-          - embed
-          properties:
-            raw:
-              description: Excerpt for the post, as it exists in the database.
-              type: string
-              context:
-              - edit
-            rendered:
-              description: HTML excerpt for the post, transformed for display.
-              type: string
-              context:
-              - view
-              - edit
-              - embed
-              readonly: true
-            protected:
-              description: Whether the excerpt is protected with a password.
-              type: boolean
-              context:
-              - view
-              - edit
-              - embed
-              readonly: true
-        featured_media:
-          description: The ID of the featured media for the post.
-          type: integer
-          context:
-          - view
-          - edit
-          - embed
-        menu_order:
-          description: The order of the post in relation to other posts.
-          type: integer
-          context:
-          - view
-          - edit
-        meta:
-          description: Meta fields.
-          type: object
-          context:
-          - view
-          - edit
-          properties:
-            footnotes:
-              type: string
-              title: ''
-              description: ''
-              default: ''
-        template:
-          description: The theme file to use to display the post.
-          type: string
-          context:
-          - view
-          - edit
-        jetpack_sharing_enabled:
-          description: Are sharing buttons enabled?
-          type: boolean
-      links:
-      - rel: https://api.w.org/action-publish
-        title: The current user can publish this post.
-        href: https://corporate.americangreetings.com/wp-json/wp/v2/brands/{id}
-        targetSchema:
-          type: object
-          properties:
-            status:
-              type: string
-              enum:
-              - publish
-              - future
-      - rel: https://api.w.org/action-unfiltered-html
-        title: The current user can post unfiltered HTML markup and JavaScript.
-        href: https://corporate.americangreetings.com/wp-json/wp/v2/brands/{id}
-        targetSchema:
-          type: object
-          properties:
-            content:
-              raw:
-                type: string
-    RestError:
-      type: object
-      description: WordPress REST API error envelope, observed on this host.
-      properties:
-        code:
-          type: string
-          description: Machine-readable error code, e.g. rest_no_route.
-        message:
-          type: string
-          description: Human-readable error message.
-        data:
-          type: object
-          properties:
-            status:
-              type: integer
-      required:
-      - code
-      - message
   securitySchemes:
     applicationPassword:
       type: http
       scheme: basic
       description: WordPress application passwords. Authorization endpoint advertised by the provider at https://corporate.americangreetings.com/wp-admin/authorize-application.php
-security: []

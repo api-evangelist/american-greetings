@@ -1,0 +1,223 @@
+openapi: 3.2.0
+info:
+  title: American Greetings Corporate WordPress REST Oembed/1.0 API
+  version: '2026-09-02'
+  description: Read-mostly content API served by American Greetings from its corporate site at corporate.americangreetings.com.
+  contact:
+    name: American Greetings
+    url: https://corporate.americangreetings.com/about-us/contact-us/
+servers:
+- url: https://corporate.americangreetings.com/wp-json
+  description: American Greetings corporate WordPress REST API
+security: []
+tags:
+- name: oembed/1.0
+  description: oEmbed discovery and proxy endpoints.
+paths:
+  /oembed/1.0:
+    get:
+      operationId: get_oembed_1_0
+      summary: GET /oembed/1.0
+      tags:
+      - oembed/1.0
+      parameters:
+      - name: namespace
+        in: query
+        required: false
+        description: ''
+        schema:
+          default: oembed/1.0
+      - name: context
+        in: query
+        required: false
+        description: ''
+        schema:
+          default: view
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+        '400':
+          description: Invalid parameter
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RestError'
+        '401':
+          description: Authentication required for this operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RestError'
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RestError'
+        '404':
+          description: No route or resource found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RestError'
+  /oembed/1.0/embed:
+    get:
+      operationId: get_oembed_1_0_embed
+      summary: GET /oembed/1.0/embed
+      tags:
+      - oembed/1.0
+      parameters:
+      - name: url
+        in: query
+        required: true
+        description: The URL of the resource for which to fetch oEmbed data.
+        schema:
+          type: string
+          format: uri
+      - name: format
+        in: query
+        required: false
+        description: ''
+        schema:
+          default: json
+      - name: maxwidth
+        in: query
+        required: false
+        description: ''
+        schema:
+          default: 600
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+        '400':
+          description: Invalid parameter
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RestError'
+        '401':
+          description: Authentication required for this operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RestError'
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RestError'
+        '404':
+          description: No route or resource found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RestError'
+  /oembed/1.0/proxy:
+    get:
+      operationId: get_oembed_1_0_proxy
+      summary: GET /oembed/1.0/proxy
+      tags:
+      - oembed/1.0
+      parameters:
+      - name: url
+        in: query
+        required: true
+        description: The URL of the resource for which to fetch oEmbed data.
+        schema:
+          type: string
+          format: uri
+      - name: format
+        in: query
+        required: false
+        description: The oEmbed format to use.
+        schema:
+          type: string
+          enum:
+          - json
+          - xml
+          default: json
+      - name: maxwidth
+        in: query
+        required: false
+        description: The maximum width of the embed frame in pixels.
+        schema:
+          type: integer
+          default: 600
+      - name: maxheight
+        in: query
+        required: false
+        description: The maximum height of the embed frame in pixels.
+        schema:
+          type: integer
+      - name: discover
+        in: query
+        required: false
+        description: Whether to perform an oEmbed discovery request for unsanctioned providers.
+        schema:
+          type: boolean
+          default: true
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+        '400':
+          description: Invalid parameter
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RestError'
+        '401':
+          description: Authentication required for this operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RestError'
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RestError'
+        '404':
+          description: No route or resource found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RestError'
+components:
+  schemas:
+    RestError:
+      type: object
+      description: WordPress REST API error envelope, observed on this host.
+      properties:
+        code:
+          type: string
+          description: Machine-readable error code, e.g. rest_no_route.
+        message:
+          type: string
+          description: Human-readable error message.
+        data:
+          type: object
+          properties:
+            status:
+              type: integer
+      required:
+      - code
+      - message
+  securitySchemes:
+    applicationPassword:
+      type: http
+      scheme: basic
+      description: WordPress application passwords. Authorization endpoint advertised by the provider at https://corporate.americangreetings.com/wp-admin/authorize-application.php
