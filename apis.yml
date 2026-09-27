@@ -79,31 +79,21 @@ apis:
     Retained as an observed host, not as a documented API. The humanURL and Documentation pointer previously
     carried here both referenced developer.americangreetings.com, which does not resolve (NXDOMAIN, verified
     2026-09-02), and were removed.
-- aid: american-greetings:american-greetings-oembed-1-0-api
-  name: American Greetings Oembed/1.0 API
-  description: oEmbed discovery and proxy endpoints.
-  humanURL: https://corporate.americangreetings.com/
+- aid: american-greetings:corporate-americangreetings-com-website-wordpress-rest
+  name: American Greetings Website (WordPress REST)
+  description: 'The public WordPress REST API (wp-json) of the American Greetings website at corporate.americangreetings.com:
+    the route index of the site''s content management system, catalogued as one site surface rather than
+    as separate APIs.'
   baseURL: https://corporate.americangreetings.com/wp-json
   tags:
-  - oembed/1.0
+  - WordPress
+  x-surface: platform-generated
   properties:
-  - type: OpenAPI
-    url: openapi/american-greetings-oembed-1-0-api-openapi.yml
-- aid: american-greetings:american-greetings-wp-v2-api
-  name: American Greetings Wp/v2 API
-  description: >-
-    WordPress core content namespace, including the American Greetings products and brands custom post
-    types.
-  humanURL: https://corporate.americangreetings.com/
-  baseURL: https://corporate.americangreetings.com/wp-json
-  tags:
-  - wp/v2
-  properties:
-  - type: OpenAPI
-    url: openapi/american-greetings-wp-v2-api-openapi.yml
+  - type: Documentation
+    url: https://corporate.americangreetings.com/wp-json
+  x-platform: wordpress
+  x-platform-surface: rest
 common:
-  - type: Overlay
-    url: overlays/american-greetings-corporate-wordpress-rest-overlay.yaml
   - type: Authentication
     url: authentication/american-greetings-authentication.yml
   - type: Conventions
