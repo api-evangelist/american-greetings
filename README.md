@@ -1,4 +1,4 @@
-# American Greetings (american-greetings)
+# American Greetings
 
 <!-- API-EVANGELIST-PROVENANCE:BEGIN -->
 > ### About this repository
@@ -64,23 +64,112 @@
 > Full detail: **[Where this data comes from](https://apievangelist.com/about/where-our-data-comes-from)**
 <!-- API-EVANGELIST-PROVENANCE:END -->
 
-American Greetings is a major US corporation and Fortune 1000 company. The American Greetings API provides programmatic access to its platform services, data, and integrations for enterprise customers and partners.
+American Greetings is a privately held American manufacturer and marketer of social expression products — greeting cards, gift packaging, party goods, stationery, stickers and decals, and digital greetings — headquartered in Westlake, Ohio, and selling through mass retail, grocery, drug and specialty channels in North America and internationally. Its brand portfolio includes American Greetings, Papyrus, Carlton Cards, Jacquie Lawson and Blue Mountain. The company operates no public developer programme: there is no developer portal, no published API documentation, no SDK in any package registry, and no API pricing. The one machine-readable API it serves in public is the WordPress REST API on its corporate site, which exposes the company's own brand and product-line catalogue as custom post types alongside its press releases and media library, readable anonymously.
 
-**URL:** [Visit APIs.json URL](https://raw.githubusercontent.com/api-evangelist/american-greetings/refs/heads/main/apis.yml)
+**Areas:** Greeting Cards · Gift Wrap · Celebration · Consumer Products · Retail · Stationery · Party Supplies · Digital Greetings · content-api · WordPress REST API
 
-**Run:** [Capabilities Using Naftiko](https://github.com/naftiko/fleet?utm_source=api-evangelist&utm_medium=readme&utm_campaign=company-api-evangelist&utm_content=repo)
+## American Greetings on APIs.io
 
-## Tags:
+Everything profiled for American Greetings is published on APIs.io rather than in this repository. Start at the provider page — **[apis.io/providers/american-greetings/](https://apis.io/providers/american-greetings/)** — or go straight to one of the APIs or properties below.
 
- - Greeting Cards, Gift Wrap, Celebration
+### APIs (2)
 
-## Timestamps
+- [American Greetings API](https://apis.io/apis/american-greetings/american-greetings-api/) — An api. host that resolves through Akamai but returns an identical "Access Denied" 403 HTML body to every non-browser client on every path, including the…
+- [American Greetings Website (WordPress REST)](https://apis.io/apis/american-greetings/corporate-americangreetings-com-website-wordpress-rest/) — The public WordPress REST API (wp-json) of the American Greetings website at corporate.americangreetings.com: the route index of the site's content…
 
-- **Created:** 2026-04-19
-- **Modified:** 2026-04-19
+### Published properties
 
-## Maintainers
+Each property below is a page on APIs.io carrying the machine-readable artifact and what it says.
 
-**FN:** Kin Lane
+#### MCP servers (1)
 
-**Email:** kin@apievangelist.com
+Model Context Protocol servers that expose the API to agents.
+
+- [american-greetings-mcp.yml](https://apis.io/servers/american-greetings/american-greetings-mcp-yml/)
+
+#### Security (2)
+
+Authentication, trust centre, and vulnerability disclosure.
+
+- [American Greetings Authentication](https://apis.io/security/american-greetings/american-greetings-authentication/)
+- [American Greetings Domain Security](https://apis.io/security/american-greetings/american-greetings-domain-security/)
+
+#### Plans and pricing (1)
+
+Published plans, tiers and prices.
+
+- [American Greetings Plans Pricing](https://apis.io/plans/american-greetings/american-greetings-plans-pricing/)
+
+#### Rate limits (1)
+
+Published request limits.
+
+- [American Greetings Rate Limits](https://apis.io/rate-limits/american-greetings/american-greetings-rate-limits/)
+
+#### FinOps (1)
+
+What the API costs to run, by operation.
+
+- [American Greetings Finops](https://apis.io/finops/american-greetings/american-greetings-finops/)
+
+## Where to find this API
+
+Links to the company's own pages. This repository publishes no copy of their specifications — the canonical document is theirs and lives at the URLs below.
+
+- [Website](https://www.americangreetings.com)
+- [Support](https://corporate.americangreetings.com/about-us/contact-us/)
+- [Blog](https://corporate.americangreetings.com/latest-news/)
+- [GitHub](https://github.com/aginteractive)
+
+## API Evangelist rating
+
+**Kin Score 16.3** — emerging · rubric 0.24.0 · scored 2026-10-17
+
+| Facet | Score |
+|---|---|
+| Discoverability | 64.3 |
+| Contract quality | 0.0 |
+| Contract governance | 4.5 |
+| Operational transparency | 2.6 |
+| Developer ergonomics | 30.4 |
+| Access clarity | 21.1 |
+
+**Agent readiness 8.8** — agent-aware
+
+| Agent-readiness dimension | Result |
+|---|---|
+| Spec Presence | — |
+| Agentic Access | — |
+| Reversibility Documented | — |
+| MCP Server | — |
+| Auth Clarity | bearer (partial credit) |
+| Idempotency | — |
+| Error Semantics | documented (partial credit) |
+| OpenAPI Examples | — |
+| Rate Limit Signal | documented (partial credit) |
+| Event Surface Described | — |
+| Agent Skills | derived (partial credit) |
+| Well Known Catalog | — |
+| Consent Identity | — |
+| Agent Card | — |
+| Dry Run Mode | — |
+| Delegated Identity | — |
+| Protected Resource Metadata | — |
+| Dynamic Client Registration | — |
+| Agentic Commerce | — |
+
+**Regulatory alignment 15.2** — Payments
+
+The rubric is published at [github.com/api-evangelist/kin-score](https://github.com/api-evangelist/kin-score). The per-check breakdown behind these numbers — which checks were earned, partial or missed — along with score history and how this provider compares to its peers, is available at [apis.io/providers/american-greetings/](https://apis.io/providers/american-greetings/).
+
+## How this profile is made
+
+API Evangelist profiles a company's public API surface the way a developer would find it: the website, developer portal and documentation, the specifications it publishes, its public repositories, and its pricing, status and changelog pages. From that it derives the properties above — contracts split per API, workflows, schemas, collections, governance rules, plans and rate limits — and scores them against the published [Kin Score rubric](https://github.com/api-evangelist/kin-score).
+
+The artifacts are published on [APIs.io](https://apis.io), not in this repository. This repository is the public record for American Greetings: the place to say something is wrong, missing or out of date, and to ask for a re-score or a removal.
+
+## Open an issue
+
+- **Something about this listing** — a wrong description, a missing API, a stale artifact or a question about the rating: [open an issue on this repository](https://github.com/api-evangelist/american-greetings/issues/new).
+- **A new API, or one that is not in the catalog yet** — [submit it on APIs.io](https://apis.io/add/).
+- **Anything else** — [the APIs.io inbox](https://github.com/api-search/inbox/issues/new) or [info@apievangelist.com](mailto:info@apievangelist.com).
